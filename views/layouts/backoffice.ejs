@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+  <base href="/">
+  <script src="/dmxAppConnect/dmxAppConnect.js"></script>
+  <meta charset="UTF-8">
+  <title>Untitled Document</title>
+
+  <!-- Set dark theme by default -->
+  <meta name="color-scheme" content="dark">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
+</head>
+
+<body is="dmx-app" id="backoffice">
+  <header>
+    <div class="container py-3">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <a href="/backoffice/" internal="true"><img src="/assets/images/Ícone 2_fundo preto.png" width="56"></a>
+        </div>
+        <div class="col-auto">
+          <div class="input-group input-group-lg" style="width: 280px;">
+            <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;">
+              <option value="">Selecione uma empresa</option>
+              <option value="1">Empresa 1</option>
+              <option value="2">Empresa 2</option>
+            </select>
+            <button class="btn btn-primary fs-7" title="Confirmar seleção"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <!-- User Profile Dropdown -->
+          <div class="dropdown">
+            <button class="btn btn-profile dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="d-flex align-items-center">
+                <img src="/assets/images/avatar.png" alt="Profile" class="rounded" width="40" height="40" style="object-fit: cover">
+                <div class="ms-2 text-start" style="min-width: 120px">
+                  <span class="d-block fw-semibold fs-7 text-white">Rubens Bentes</span>
+                  <small class="d-block fs-8 text-body-secondary">Pro</small>
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <!-- User Profile Card in Dropdown -->
+              <div class="p-3" style="background-color: var(--sp-container);">
+                <div class="d-flex align-items-center">
+                  <img src="/assets/images/avatar.png" alt="Profile" class="rounded" width="48" height="48" style="object-fit: cover">
+                  <div class="ms-3 text-start">
+                    <h6 class="mb-1 fw-semibold fs-7 text-white">Rubens Bentes</h6>
+                    <div class="fs-8 text-body-secondary">rubens@spacefeed.app</div>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i> Profile Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger" href="#" dmx-on:click="user.logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Second Header -->
+  <div class="menu-header" style="background-color: var(--sp-navbar);">
+    <div class="container py-3">
+      <div class="row align-items-center">
+        <div class="col">
+          <nav class="nav gap-2">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+            <a class="nav-link" href="/clients">Clients</a>
+            <a class="nav-link" href="/reports">Reports</a>
+          </nav>
+        </div>
+        <div class="col-auto">
+          <!-- Support Button -->
+          <button class="btn btn-orange fs-7 h-100 px-4" style="height: calc(2.5rem + 2px);">
+            <i class="fas fa-headset"></i>
+            <span class="ms-2">Suporte</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main is="dmx-view" id="content">
+    <%- await include(content, locals); %>
+  </main>
+  <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

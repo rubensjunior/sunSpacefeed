@@ -5,6 +5,16 @@
       "page": "index",
       "routeType": "page",
       "layout": "main"
+    },
+    {
+      "path": "/sign-up",
+      "page": "sign-up",
+      "layout": "main"
+    },
+    {
+      "path": "/backoffice/",
+      "page": "dashboard/inicial",
+      "layout": "backoffice"
     }
   ]
 }

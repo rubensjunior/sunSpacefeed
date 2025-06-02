@@ -1,0 +1,9 @@
+{
+  "bootstrap5": {
+    "basic": {
+      "enable-shadows": true,
+      "enable-gradients": true
+    },
+    "advanced": {}
+  }
+}
