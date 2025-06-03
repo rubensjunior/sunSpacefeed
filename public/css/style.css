@@ -18,8 +18,7 @@ body {
   background-color: var(--sp-container);
   border-radius: 1rem;
   padding: 2.5rem;
-  -webkit-box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
 }
 
 .login-form .form-control {
@@ -29,37 +28,13 @@ body {
   color: #fff;
   padding: 0.625rem 1rem; /* Reduced from 0.75rem */
   font-size: 14px;
-  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-}
-
-/* Add placeholder color */
-.login-form .form-control::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 1;
-}
-.login-form .form-control::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 1;
-}
-.login-form .form-control:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 1;
-}
-.login-form .form-control::-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 1;
-}
-.login-form .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 1;
 }
 
 .login-form .form-control:focus {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: var(--sp-primary);
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
-          box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
 }
 
 .login-form .form-control-lg {
@@ -90,7 +65,6 @@ body {
 .login-form .btn-primary {
   background-color: var(--sp-primary);
   border-color: var(--sp-primary);
-  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   font-weight: 500;
   height: calc(3rem + 2px); /* Match input height */
@@ -389,16 +363,37 @@ body {
   border-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Select Styles */
 .form-select {
   background-color: var(--sp-container);
   border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select option {
+  background-color: var(--sp-container);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px;
+}
+
+.form-select option:hover,
+.form-select option:focus,
+.form-select option:active,
+.form-select option:checked {
+  background-color: var(--sp-primary);
+  color: #fff;
+}
+
+/* Placeholder style for select */
+.form-select option[value=""] {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-select:focus {
   border-color: var(--sp-primary);
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
-          box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
-  background-color: rgba(255,255,255,0.1);
+  box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+  background-color: var(--sp-container);
 }
 
 .menu-header .form-select option {
