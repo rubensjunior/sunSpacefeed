@@ -74,7 +74,7 @@
                             <h3 class="text-center mb-4">Dados de Endereço</h3>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" required>
+                                    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Endereço completo" required="">
                                 </div>
                                 <div class="col-md-3">
                                     <input type="text" class="form-control" id="numero" name="numero" placeholder="Número" required>
@@ -163,14 +163,22 @@
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" id="polos_adicionais" name="polos_adicionais" placeholder="Quantidade de Polos Adicionais" value="0" min="0" dmx-on:input="polos_value.setValue(this.value.toNumber() * 99)">
                                 </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="valor_plano" placeholder="Valor do Plano" readonly dmx-bind:value="plano_value.value.formatCurrency('R$ ')">
+                                <div class="col-md-12">
+                                    <p>A nice paragraph</p>
+
                                 </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="valor_polos" placeholder="Valor Polos Adicionais" readonly dmx-bind:value="polos_value.value.formatCurrency('R$ ')">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="valor_total" placeholder="Valor Total" readonly dmx-bind:value="(plano_value.value + polos_value.value).formatCurrency('R$ ')">
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex align-items-center flex-row justify-content-between mb-2">
+                                        <h6 class="m-0">Fancy display heading</h6><input type="text" class="form-control w-25" id="valor_plano" placeholder="Valor do Plano" readonly="" dmx-bind:value="plano_value.value.formatCurrency('R$ ')">
+                                    </div>
+                                    <div class="d-flex align-items-center flex-row justify-content-between mb-2">
+                                        <h6 class="m-0">Fancy display heading</h6><input type="text" class="form-control w-25" id="valor_polos" placeholder="Valor Polos Adicionais" readonly="" dmx-bind:value="polos_value.value.formatCurrency('R$ ')">
+                                    </div>
+                                    <div class="d-flex align-items-center flex-row justify-content-between p-3 rounded-3 border">
+                                        <h5 class="m-0">Fancy display heading</h5><input type="text" class="form-control w-25" id="valor_total" placeholder="Valor Total" readonly="" dmx-bind:value="(plano_value.value + polos_value.value).formatCurrency('R$ ')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
