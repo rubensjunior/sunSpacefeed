@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/sign-up.ejs",
+      "linkedForm": "cnpj_check_form"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "check_cnpj",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o CNPJ"
+            }
+          }
+        },
+        "name": "check_cnpj"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "queryCNPJ",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "empresas",
+                "column": "id_empresa"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_fantasia"
+              },
+              {
+                "table": "empresas",
+                "column": "razao_social"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_POST.check_cnpj}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "empresas"
+            },
+            "primary": "id_empresa",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "empresas.cnpj",
+                  "field": "empresas.cnpj",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.check_cnpj}}",
+                  "data": {
+                    "table": "empresas",
+                    "column": "cnpj",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "text",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "cnpj"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"id_empresa\", \"status_empresa\", \"cnpj\", \"nome_polo\", \"nome_fantasia\", \"razao_social\" from \"empresas\" where \"empresas\".\"cnpj\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_empresa"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          },
+          {
+            "type": "text",
+            "name": "cnpj"
+          },
+          {
+            "type": "text",
+            "name": "nome_polo"
+          },
+          {
+            "type": "text",
+            "name": "nome_fantasia"
+          },
+          {
+            "type": "text",
+            "name": "razao_social"
+          }
+        ],
+        "type": "dbconnector_single",
+        "outputType": "object"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.check_cnpj==queryCNPJ.cnpj}}",
+          "then": {
+            "steps": {
+              "name": "",
+              "module": "core",
+              "action": "condition",
+              "options": {
+                "if": "{{queryCNPJ.status_empresa=='Pagamento Pendente'}}",
+                "then": {
+                  "steps": {
+                    "name": "resposta",
+                    "module": "core",
+                    "action": "setvalue",
+                    "options": {
+                      "value": 1
+                    },
+                    "meta": [],
+                    "outputType": "number",
+                    "output": true
+                  }
+                },
+                "else": {
+                  "steps": {
+                    "name": "",
+                    "module": "core",
+                    "action": "condition",
+                    "options": {
+                      "if": "{{queryCNPJ.status_empresa=='Ativo'}}",
+                      "then": {
+                        "steps": {
+                          "name": "resposta",
+                          "module": "core",
+                          "action": "setvalue",
+                          "options": {
+                            "value": 2
+                          },
+                          "meta": [],
+                          "outputType": "number",
+                          "output": true
+                        }
+                      },
+                      "else": {
+                        "steps": {
+                          "name": "",
+                          "module": "core",
+                          "action": "condition",
+                          "options": {
+                            "if": "{{queryCNPJ.status_empresa=='Inativo'}}",
+                            "then": {
+                              "steps": {
+                                "name": "resposta",
+                                "module": "core",
+                                "action": "setvalue",
+                                "options": {
+                                  "value": 3
+                                },
+                                "meta": [],
+                                "outputType": "text",
+                                "output": true
+                              }
+                            }
+                          },
+                          "outputType": "boolean"
+                        }
+                      }
+                    },
+                    "outputType": "boolean"
+                  }
+                }
+              },
+              "outputType": "boolean"
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "resposta",
+              "module": "core",
+              "action": "setvalue",
+              "options": {
+                "value": 4
+              },
+              "meta": [],
+              "outputType": "text",
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

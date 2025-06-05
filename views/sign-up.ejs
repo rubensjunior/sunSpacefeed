@@ -1,5 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="signup" appConnect="local" components="{dmxValidator:{},dmxStateManagement:{},dmxFormatter:{},dmxMasking:{},dmxServerConnect:{},dmxDataTraversal:{}}" -->
 <dmx-data-detail id="data_detail_plano_escolhido" dmx-bind:data="planos.data.queryPlanos" key="id_plano"></dmx-data-detail>
+<dmx-value id="resposta_status" dmx-bind:value="0"></dmx-value>
+
 <dmx-serverconnect id="planos" url="/api/admin/listar-planos"></dmx-serverconnect>
 <meta name="ac:route" content="/sign-up">
 
@@ -10,9 +12,28 @@
             <img src="/assets/images/spacefeed-white.png" alt="SpaceFeed" width="200" class="img-fluid">
         </div>
 
+        <!-- CNPJ Pre-check Form -->
+        <div class="mx-auto bg-dark bg-opacity-25 rounded-3 border border-secondary border-opacity-10 mb-4" style="max-width: 800px;" dmx-show="resposta_status.value == 0">
+            <div class="p-4">
+                <form id="cnpj_check_form" method="post" action="/api/nova-conta/validar-cnpj" is="dmx-serverconnect-form" dmx-on:error="alertas.danger('Ocorreu um erro! Entre em contato com o suporte: suporte@spacefeed.app.')" dmx-on:success="resposta_status.setValue(cnpj_check_form.data.resposta)">
+                    <h3 class="text-center mb-4">Verificar CNPJ</h3>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mask-cnpj mb-3" id="check_cnpj" name="check_cnpj" placeholder="Digite o CNPJ" required data-msg-required="Por favor, informe o CNPJ">
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-lg btn-primary">
+                                <i class="fas fa-search me-2"></i>Verificar CNPJ
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Registration Form -->
         <!-- Modern Progress Bar -->
-        <div class="position-relative mb-5 mx-auto px-4" style="max-width: 800px;">
+        <div class="position-relative mb-5 mx-auto px-4" style="max-width: 800px;" dmx-show="resposta_status.value == 4">
             <div class="steps-container">
                 <div class="progress-line"></div>
                 <div class="steps">
@@ -47,28 +68,44 @@
             <div class="mx-auto bg-dark bg-opacity-25 rounded-3 border border-secondary border-opacity-10 mb-4" style="max-width: 800px;">
                 <div class="p-4">
                     <!-- Multi-step Form Container -->
-                    <form id="signup_form" method="post" action="/api/signup">
+                    <form id="signup_form" method="post" action="/api/nova-conta/signup-cliente" is="dmx-serverconnect-form" novalidate="" dmx-on:error="console.error('Erro na submissão:', error); alertas.warning('Erro ao criar conta: ' + error.message)" dmx-on:success="console.log('Resposta do servidor:', this.data); alertas.success('Conta criada com sucesso!')">
                         <!-- Step 1: Company Data -->
                         <div class="step-content" dmx-show="signup_step.value === 1">
                             <h3 class="text-center mb-4">Dados da Empresa</h3>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="razao_social" name="razao_social" placeholder="Razão Social" required data-msg-required="Por favor, informe a Razão Social">
+                                    <label for="razao_social" class="form-label">Razão Social</label>
+                                    <input type="text" class="form-control" id="razao_social" name="razao_social" required data-msg-required="Por favor, informe a Razão Social">
+                                    <div class="invalid-feedback">Por favor, informe a Razão Social</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia" placeholder="Nome Fantasia" required data-msg-required="Por favor, informe o Nome Fantasia">
+                                    <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
+                                    <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia" required data-msg-required="Por favor, informe o Nome Fantasia">
+                                    <div class="invalid-feedback">Por favor, informe o Nome Fantasia</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="nome_polo" name="nome_polo" placeholder="Nome do Polo" required data-msg-required="Por favor, informe o Nome do Polo">
+                                    <label for="nome_polo" class="form-label">Nome do Polo</label>
+                                    <input type="text" class="form-control" id="nome_polo" name="nome_polo" required data-msg-required="Por favor, informe o Nome do Polo">
+                                    <div class="invalid-feedback">Por favor, informe o Nome do Polo</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control mask-cnpj" id="cnpj" name="cnpj" placeholder="CNPJ" required data-msg-required="Por favor, informe o CNPJ">
+                                    <label for="cnpj" class="form-label">CNPJ</label>
+                                    <input type="text" class="form-control mask-cnpj" id="cnpj" name="cnpj" required data-msg-required="Por favor, informe o CNPJ">
+                                    <div class="invalid-feedback">Por favor, informe um CNPJ válido</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control mask-whatsapp" id="whatsapp" name="whatsapp" placeholder="WhatsApp" required data-msg-required="Por favor, informe o WhatsApp">
+                                    <label for="whatsapp" class="form-label">WhatsApp</label>
+                                    <input type="text" class="form-control mask-whatsapp" id="whatsapp" name="whatsapp" required data-msg-required="Por favor, informe o WhatsApp">
+                                    <div class="invalid-feedback">Por favor, informe um número de WhatsApp válido</div>
                                 </div>
                             </div>
                         </div>
+
+                        <style>
+                            .form-label {
+                                color: rgba(255, 255, 255, 0.8);
+                            }
+                        </style>
 
                         <!-- Step 2: Address -->
                         <div class="step-content" dmx-show="signup_step.value === 2">
@@ -132,19 +169,29 @@
                             <h3 class="text-center mb-4">Dados do Usuário</h3>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="nome_completo" name="nome_completo" placeholder="Nome Completo" required data-msg-required="Por favor, informe o Nome Completo">
+                                    <label for="nome_completo" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="nome_completo" name="nome_completo" required data-msg-required="Por favor, informe o Nome Completo">
+                                    <div class="invalid-feedback">Por favor, informe seu nome completo</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="nome_tratamento" name="nome_tratamento" placeholder="Nome de Tratamento" required data-msg-required="Por favor, informe o Nome de Tratamento">
+                                    <label for="nome_tratamento" class="form-label">Nome de Tratamento</label>
+                                    <input type="text" class="form-control" id="nome_tratamento" name="nome_tratamento" required data-msg-required="Por favor, informe o Nome de Tratamento">
+                                    <div class="invalid-feedback">Por favor, informe como deseja ser chamado</div>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-rule-email="true" data-msg-required="Por favor, informe o Email" data-msg-email="Por favor, informe um Email válido">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required data-rule-email="true" data-msg-required="Por favor, informe o Email" data-msg-email="Por favor, informe um Email válido">
+                                    <div class="invalid-feedback">Por favor, informe um endereço de email válido</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required minlength="8" data-msg-required="Por favor, informe a Senha" data-msg-minlength="A senha deve ter no mínimo 8 caracteres">
+                                    <label for="senha" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="senha" name="senha" required minlength="8" data-msg-required="Por favor, informe a Senha" data-msg-minlength="A senha deve ter no mínimo 8 caracteres">
+                                    <div class="invalid-feedback">A senha deve ter no mínimo 8 caracteres</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha" required data-rule-equalto="#senha" data-msg-required="Por favor, confirme a Senha" data-msg-equalto="As senhas não conferem">
+                                    <label for="confirmar_senha" class="form-label">Confirmar Senha</label>
+                                    <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required data-rule-equalto="#senha" data-msg-required="Por favor, confirme a Senha" data-msg-equalto="As senhas não conferem">
+                                    <div class="invalid-feedback">As senhas não conferem</div>
                                 </div>
                             </div>
                         </div>
@@ -193,6 +240,14 @@
                                             <input type="number" step="0.01" class="form-control text-end border-0 bg-transparent ps-0 pe-2" style="width: 100px;" id="valor_total" placeholder="0" readonly dmx-bind:value="(data_detail_plano_escolhido.data.valor_base.toNumber() + (data_detail_plano_escolhido.data.valor_polo_extra.toNumber() * polos_adicionais.value)).toFixed(2)">
                                         </div>
                                     </div>
+                                    <div class="d-flex flex-column p-3 mt-3 rounded-3 border border-opacity-10 border-light" style="background-color: var(--sp-container)">
+                                        <div class="text-white text-center mb-2">
+                                            <small>Ao clicar em "Criar conta", você concorda com os <a href="/termos-de-uso" target="_blank" class="text-decoration-none text-primary">Termos de Uso</a> e <a href="/politica-de-privacidade" target="_blank" class="text-decoration-none text-primary">Política de Privacidade</a> da plataforma.</small>
+                                        </div>
+                                        <div class="text-white text-center">
+                                            <small>Pagamento 100% seguro, processado pela plataforma Asaas. Nenhuma informação bancária é armazenada em nossos sistemas.</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,17 +256,44 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="d-flex justify-content-between mx-auto" style="max-width: 800px;">
+            <div class="d-flex justify-content-between mx-auto" style="max-width: 800px;" dmx-show="resposta_status.value == 4">
                 <button type="button" class="btn btn-lg btn-secondary" dmx-on:click="signup_step.setValue(signup_step.value - 1)" dmx-bind:disabled="signup_step.value === 1">
                     <i class="fas fa-arrow-left me-2"></i>Anterior
                 </button>
                 <button type="button" class="btn btn-lg btn-primary" dmx-show="signup_step.value < 4" dmx-on:click="signup_step.setValue(signup_step.value + 1)">
                     Próximo<i class="fas fa-arrow-right ms-2"></i>
                 </button>
-                <button type="submit" class="btn btn-lg btn-success" dmx-show="signup_step.value === 4" form="signup_form">
-                    <i class="fas fa-check me-2"></i>Finalizar Cadastro
-                </button>
+                <button type="submit" class="btn btn-lg btn-success" dmx-show="signup_step.value === 4" form="signup_form"><i class="fas fa-check me-2"></i>Criar Conta</button>
             </div>
+        </div>
+        <div class="jumbotron" id="pagamentoPendente" dmx-show="resposta_status.value == 1">
+            <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
+            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma e o pagamento da fatura está em fase de processamento.</p>
+            <hr class="my-4">
+            <p>Assim que a confirmação for concluída, sua conta será ativada automaticamente.
+            <p>Caso a confirmação demore mais de 1 dia útil, entre em contato com o suporte para verificar a situação.</p>
+            </p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+            </p>
+        </div>
+        <div class="jumbotron" id="ativo" dmx-show="resposta_status.value == 2">
+            <h1 class="display-3">Esta empresa já está ativa!</h1>
+            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma com status ativo.</p>
+            <hr class="my-4">
+            <p>Caso você precise acessar a conta, utilize a opção de login. Se tiver dificuldades, entre em contato com o suporte.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+            </p>
+        </div>
+        <div class="jumbotron" id="inativo" dmx-show="resposta_status.value == 3">
+            <h1 class="display-3">Esta empresa está inativa!</h1>
+            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma, mas encontra-se com status inativo.</p>
+            <hr class="my-4">
+            <p>Para reativar a conta ou obter mais informações, entre em contato com o suporte.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+            </p>
         </div>
     </div>
 
@@ -220,3 +302,63 @@
     <dmx-value id="valor_base" dmx-bind:value="0"></dmx-value>
     <dmx-value id="valor_total_pedido" dmx-bind:value="0"></dmx-value>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+<script>
+    $('#cep').mask('00000-000');
+        $('#cnpj').mask('00.000.000/0000-00');
+        $('#check_cnpj').mask('00.000.000/0000-00');
+        $('#whatsapp').mask('(00) 0 0000-0000');
+
+        // Função para validar o step atual
+        const validateStep = () => {
+            const currentStep = signup_step.value;
+            let isValid = true;
+            const form = document.getElementById('signup_form');
+            
+            // Pega todos os campos visíveis do step atual
+            const allFields = form.querySelectorAll(`input, select`);
+            
+            // Valida cada campo
+            allFields.forEach(field => {
+                if (!field.checkValidity()) {
+                    field.classList.add('is-invalid');
+                    field.classList.remove('is-valid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                    field.classList.add('is-valid');
+                }
+            });
+
+            // Se for o último step e todos os campos estiverem válidos
+            if (isValid && currentStep === 4) {
+                // Valida todos os campos do formulário antes de enviar
+                if (form.checkValidity()) {
+                    form.submit();
+                } else {
+                    // Se houver campos inválidos em outros steps, muda para o step com erro
+                    for (let i = 1; i <= 4; i++) {
+                        const stepFields = form.querySelectorAll(`[dmx-show="signup_step.value === ${i}"] input, [dmx-show="signup_step.value === ${i}"] select`);
+                        if (Array.from(stepFields).some(field => !field.checkValidity())) {
+                            signup_step.setValue(i);
+                            break;
+                        }
+                    }
+                }
+                return false;
+            }
+            return false;
+        };
+
+        // Prevent form submission on Enter key
+        document.getElementById('signup_form').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                validateStep();
+            }
+        });
+</script>
