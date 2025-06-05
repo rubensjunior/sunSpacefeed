@@ -2,5 +2,13 @@
   "sign-up.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "cadastrar-conta.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "criar-conta.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

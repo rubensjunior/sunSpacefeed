@@ -61,5 +61,44 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "criarconta": {
+    "data_detail_plano": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_plano"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        },
+        {
+          "type": "text",
+          "name": "descricao"
+        },
+        {
+          "type": "number",
+          "name": "valor_base"
+        },
+        {
+          "type": "number",
+          "name": "valor_polo_extra"
+        },
+        {
+          "type": "number",
+          "name": "odem"
+        },
+        {
+          "type": "number",
+          "name": "limite_colaboradores_por_polo"
+        },
+        {
+          "type": "number",
+          "name": "limite_alunos_por_polo"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

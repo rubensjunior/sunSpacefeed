@@ -5,7 +5,7 @@
 <dmx-serverconnect id="planos" url="/api/admin/listar-planos"></dmx-serverconnect>
 <meta name="ac:route" content="/sign-up">
 
-<div class="min-vh-100 d-flex align-items-center py-5" style="background-color: var(--sp-background)">
+<div class="min-vh-100 d-flex align-items-center py-3" style="background-color: var(--sp-background)">
     <div class="container">
         <!-- Logo -->
         <div class="text-center mb-4">
@@ -68,7 +68,7 @@
             <div class="mx-auto bg-dark bg-opacity-25 rounded-3 border border-secondary border-opacity-10 mb-4" style="max-width: 800px;">
                 <div class="p-4">
                     <!-- Multi-step Form Container -->
-                    <form id="signup_form" method="post" action="/api/nova-conta/signup-cliente" is="dmx-serverconnect-form" novalidate="" dmx-on:error="console.error('Erro na submissão:', error); alertas.warning('Erro ao criar conta: ' + error.message)" dmx-on:success="console.log('Resposta do servidor:', this.data); alertas.success('Conta criada com sucesso!')">
+                    <form id="signup_form" method="post" action="/api/nova-conta/signup-create" is="dmx-serverconnect-form" novalidate="" dmx-on:error="console.error('Erro na submissão:', error); alertas.warning('Erro ao criar conta: ' + error.message)" dmx-on:success="console.log('Resposta do servidor:', this.data); alertas.success('Conta criada com sucesso!')">
                         <!-- Step 1: Company Data -->
                         <div class="step-content" dmx-show="signup_step.value === 1">
                             <h3 class="text-center mb-4">Dados da Empresa</h3>
@@ -266,35 +266,42 @@
                 <button type="submit" class="btn btn-lg btn-success" dmx-show="signup_step.value === 4" form="signup_form"><i class="fas fa-check me-2"></i>Criar Conta</button>
             </div>
         </div>
-        <div class="jumbotron" id="pagamentoPendente" dmx-show="resposta_status.value == 1">
-            <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
-            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma e o pagamento da fatura está em fase de processamento.</p>
-            <hr class="my-4">
-            <p>Assim que a confirmação for concluída, sua conta será ativada automaticamente.
-            <p>Caso a confirmação demore mais de 1 dia útil, entre em contato com o suporte para verificar a situação.</p>
-            </p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
-            </p>
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <div class="jumbotron" id="pagamentoPendente" dmx-show="resposta_status.value == 1">
+                    <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
+                    <p class="lead">Este CNPJ já está cadastrado em nossa plataforma e o pagamento da fatura está em fase de processamento.</p>
+                    <hr class="my-4">
+                    <p>Assim que a confirmação for concluída, sua conta será ativada automaticamente.
+                    <p>Caso a confirmação demore mais de 1 dia útil, entre em contato com o suporte para verificar a situação.</p>
+                    </p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+                    </p>
+                </div>
+                <div class="jumbotron" id="ativo" dmx-show="resposta_status.value == 2">
+                    <h1 class="display-3">Esta empresa já está ativa!</h1>
+                    <p class="lead">Este CNPJ já está cadastrado em nossa plataforma com status ativo.</p>
+                    <hr class="my-4">
+                    <p>Caso você precise acessar a conta, utilize a opção de login. Se tiver dificuldades, entre em contato com o suporte.</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+                    </p>
+                </div>
+                <div class="jumbotron" id="inativo" dmx-show="resposta_status.value == 3">
+                    <h1 class="display-3">Esta empresa está inativa!</h1>
+                    <p class="lead">Este CNPJ já está cadastrado em nossa plataforma, mas encontra-se com status inativo.</p>
+                    <hr class="my-4">
+                    <p>Para reativar a conta ou obter mais informações, entre em contato com o suporte.</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="jumbotron" id="ativo" dmx-show="resposta_status.value == 2">
-            <h1 class="display-3">Esta empresa já está ativa!</h1>
-            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma com status ativo.</p>
-            <hr class="my-4">
-            <p>Caso você precise acessar a conta, utilize a opção de login. Se tiver dificuldades, entre em contato com o suporte.</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
-            </p>
-        </div>
-        <div class="jumbotron" id="inativo" dmx-show="resposta_status.value == 3">
-            <h1 class="display-3">Esta empresa está inativa!</h1>
-            <p class="lead">Este CNPJ já está cadastrado em nossa plataforma, mas encontra-se com status inativo.</p>
-            <hr class="my-4">
-            <p>Para reativar a conta ou obter mais informações, entre em contato com o suporte.</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de Suporte</a>
-            </p>
-        </div>
+
+
+
     </div>
 
     <!-- Data Stores -->
