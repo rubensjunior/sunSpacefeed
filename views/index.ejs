@@ -14,7 +14,7 @@
                     </div>
 
                     <!-- Formulário de Login -->
-                    <form is="dmx-serverconnect-form" id="login_form" method="post" action="/api/autenticacao/login" dmx-on:error="alertas.danger('Ocorreu um erro!')" dmx-on:success="alertas.success('Login com sucesso!')">
+                    <form is="dmx-serverconnect-form" id="login_form" method="post" action="/api/autenticacao/login" dmx-on:error="alertas.danger('Ocorreu um erro!')" dmx-on:success="navegacao.goto('/selecionar-empresa')">
                         <div class="mb-3">
                             <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Endereço de e-mail" required>
                         </div>

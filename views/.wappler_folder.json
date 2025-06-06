@@ -10,5 +10,9 @@
   "criar-conta.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "selecionar-empresa.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

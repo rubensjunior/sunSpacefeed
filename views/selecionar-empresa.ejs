@@ -1,0 +1,24 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="selecionarempresa" appConnect="local" -->
+<dmx-serverconnect id="selecaoempresa" noload="true" url="/api/negocios/selecionar-empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listagemempresa" url="/api/negocios/listar-empresa"></dmx-serverconnect>
+<div class="container text-center py-5">
+    <div class="row align-items-center justify-content-center">
+        <div class="col align-self-center">
+            <img src="/assets/images/spacefeed-white.png" width="200" class="mb-4 mx-auto">
+            <h4 class="text-center mb-5">Bem-vindo(a) {{listagemempresa.data.query_usuario.nome_tratamento}}. Escolha sua empresa.</h4>
+            <div class="row align-items-center justify-content-center" is="dmx-repeat" id="repeatempresas" dmx-bind:repeat="listagemempresa.data.query_empresas" key="id_empresa">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mb-3">{{nome_polo}}</h4>
+                            <a href="/security/backoffice/" class="btn w-100 btn-success" dmx-show="status_empresa=='Ativo'" dmx-on:click="selecaoempresa.load({id_empresa_selecionada: id_empresa})">Empresa Ativa</a>
+                            <a href="/security/backoffice/" class="btn w-100 btn-warning" dmx-show="status_empresa=='Pagamento Pendente'" dmx-on:click="selecaoempresa.load({id_empresa_selecionada: id_empresa})">Pendente</a><a href="#" class="btn w-100 disabled btn-secondary" dmx-show="status_empresa=='Inativo'">Empresa Inativa</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<meta name="ac:route" content="/selecionar-empresa">

@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identificar_usuario",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "query_usuario",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "id_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_tratamento"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identificar_usuario}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identificar_usuario}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"id_usuario\", \"nome_tratamento\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_tratamento"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "query_empresas",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "empresas",
+                "column": "id_empresa"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identificar_usuario}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios_empresas"
+            },
+            "primary": "id_usuario_empresa",
+            "joins": [
+              {
+                "table": "empresas",
+                "column": "*",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "empresas",
+                      "column": "id_empresa",
+                      "operation": "=",
+                      "operator": "equal",
+                      "value": {
+                        "table": "usuarios_empresas",
+                        "column": "ref_id_empresa",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                },
+                "primary": "id_empresa"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios_empresas.ref_id_usuario",
+                  "field": "usuarios_empresas.ref_id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identificar_usuario}}",
+                  "data": {
+                    "table": "usuarios_empresas",
+                    "column": "ref_id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": false,
+                      "references": "id_usuario",
+                      "inTable": "usuarios",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "CASCADE",
+                      "name": "ref_id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"empresas\".\"id_empresa\", \"empresas\".\"nome_polo\", \"empresas\".\"status_empresa\" from \"usuarios_empresas\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios_empresas\".\"ref_id_empresa\" where \"usuarios_empresas\".\"ref_id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_empresa"
+          },
+          {
+            "type": "text",
+            "name": "nome_polo"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}

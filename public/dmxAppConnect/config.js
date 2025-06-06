@@ -100,5 +100,24 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "selecionarempresa": {
+    "repeatempresas": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_empresa"
+        },
+        {
+          "type": "text",
+          "name": "nome_polo"
+        },
+        {
+          "type": "text",
+          "name": "status_empresa"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

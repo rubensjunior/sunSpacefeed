@@ -12,9 +12,20 @@
       "layout": "main"
     },
     {
-      "path": "/backoffice/",
+      "path": "/security/backoffice/",
       "page": "dashboard/inicial",
       "layout": "backoffice"
+    },
+    {
+      "path": "/selecionar-empresa",
+      "page": "selecionar-empresa",
+      "layout": "main",
+      "exec": "/api/autenticacao/pagina-restrita"
     }
-  ]
+  ],
+  "layouts": {
+    "backoffice": {
+      "exec": "/api/autenticacao/pagina-restrita"
+    }
+  }
 }
