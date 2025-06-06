@@ -2,5 +2,29 @@
   "inicial.ejs": {
     "layoutPage": "backoffice",
     "description": ""
+  },
+  "dashboard.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "unidades-polos.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "postagens.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "notificacoes-push.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "suporte-aluno.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "colaboradores.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
   }
 }

@@ -15,9 +15,16 @@
   <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <script src="/dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
+  <script src="/dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+  <script src="/dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice">
+  <dmx-notifications id="alertas"></dmx-notifications>
+  <div is="dmx-browser" id="navegacao"></div>
+  <dmx-serverconnect id="deslogar" noload="true" url="/api/autenticacao/logout" credentials="true" dmx-on:success="navegacao.goto('/')"></dmx-serverconnect>
+  <dmx-serverconnect id="minhasempresas" url="/api/negocios/listar-empresa"></dmx-serverconnect>
   <dmx-serverconnect id="meuusuario" credentials="true" url="/api/autenticacao/usuario-logado"></dmx-serverconnect>
   <header>
     <div class="container py-3">
@@ -27,10 +34,8 @@
         </div>
         <div class="col-auto">
           <div class="input-group input-group-lg" style="width: 280px;">
-            <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;">
+            <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa">
               <option value="">Selecione uma empresa</option>
-              <option value="1">Empresa 1</option>
-              <option value="2">Empresa 2</option>
             </select>
             <button class="btn btn-primary fs-7" title="Confirmar seleção"><i class="fas fa-check"></i></button>
           </div>
@@ -61,7 +66,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Meu perfil</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="#" dmx-on:click="user.logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+              <a class="dropdown-item text-danger" href="#" dmx-on:click="deslogar.load()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
             </div>
           </div>
         </div>
@@ -75,9 +80,11 @@
       <div class="row align-items-center">
         <div class="col">
           <nav class="nav gap-2">
-            <a class="nav-link" href="/dashboard">Dashboard</a>
-            <a class="nav-link" href="/clients">Clients</a>
-            <a class="nav-link" href="/reports">Reports</a>
+            <a class="nav-link" href="/security/backoffice/colaboradores" internal="true">Colaboradores</a>
+            <a class="nav-link" href="/security/backoffice/unidades-polos" internal="true">Unidades/Polos</a>
+            <a class="nav-link" href="/security/backoffice/postagens" internal="true">Postagens</a>
+            <a class="nav-link" href="/security/backoffice/notificacoes-push" internal="true">Notificações Push<br></a>
+            <a class="nav-link" href="/security/backoffice/suporte-aluno" internal="true">Suporte ao aluno</a>
           </nav>
         </div>
         <div class="col-auto">

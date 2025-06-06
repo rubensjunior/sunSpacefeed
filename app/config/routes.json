@@ -21,6 +21,36 @@
       "page": "selecionar-empresa",
       "layout": "main",
       "exec": "/api/autenticacao/pagina-restrita"
+    },
+    {
+      "path": "/security/backoffice/dashboard",
+      "page": "dashboard/dashboard",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/unidades-polos",
+      "page": "dashboard/unidades-polos",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/postagens",
+      "page": "dashboard/postagens",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/notificacoes-push",
+      "page": "dashboard/notificacoes-push",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/suporte-aluno",
+      "page": "dashboard/suporte-aluno",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/colaboradores",
+      "page": "dashboard/colaboradores",
+      "layout": "backoffice"
     }
   ],
   "layouts": {
