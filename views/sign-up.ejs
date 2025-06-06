@@ -6,10 +6,11 @@
 <meta name="ac:route" content="/sign-up">
 
 <div class="min-vh-100 d-flex align-items-center py-3" style="background-color: var(--sp-background)">
+
     <div class="container">
         <!-- Logo -->
         <div class="text-center mb-4">
-            <img src="/assets/images/spacefeed-white.png" alt="SpaceFeed" width="200" class="img-fluid">
+            <a href="/"><img src="/assets/images/spacefeed-white.png" alt="SpaceFeed" width="200" class="img-fluid"></a>
         </div>
 
         <!-- CNPJ Pre-check Form -->
@@ -68,7 +69,7 @@
             <div class="mx-auto bg-dark bg-opacity-25 rounded-3 border border-secondary border-opacity-10 mb-4" style="max-width: 800px;">
                 <div class="p-4">
                     <!-- Multi-step Form Container -->
-                    <form id="signup_form" method="post" action="/api/nova-conta/signup-create" is="dmx-serverconnect-form" dmx-on:error="console.error('Erro na submissão:', error); alertas.warning('Erro ao criar conta: ' + error.message)" dmx-on:success="console.log('Resposta do servidor:', this.data); alertas.success('Conta criada com sucesso!')">
+                    <form id="signup_form" method="post" action="/api/nova-conta/signup-create" is="dmx-serverconnect-form" dmx-on:error="console.error('Erro na submissão:', error); alertas.warning('Erro ao criar conta: ' + error.message)" dmx-on:success="resposta_status.setValue(1); alertas.success('Conta criada com sucesso!')">
                         <!-- Step 1: Company Data -->
                         <div class="step-content" dmx-show="signup_step.value === 1">
                             <h3 class="text-center mb-4">Dados da Empresa</h3>

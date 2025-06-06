@@ -1,0 +1,24 @@
+{
+  "name": "security",
+  "module": "auth",
+  "action": "provider",
+  "options": {
+    "secret": "hn3aIh3NAA5Xtdf",
+    "provider": "Database",
+    "connection": "postrgress",
+    "passwordVerify": true,
+    "users": {
+      "table": "usuarios",
+      "identity": "id_usuario",
+      "username": "email",
+      "password": "senha"
+    },
+    "permissions": {}
+  },
+  "meta": [
+    {
+      "name": "identity",
+      "type": "text"
+    }
+  ]
+}

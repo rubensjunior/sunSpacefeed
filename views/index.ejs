@@ -3,7 +3,8 @@
 <meta charset="UTF-8">
 <meta name="language" content="pt-BR">
 
-<div class="min-vh-100 d-flex align-items-center py-5">
+<div class="min-vh-100 d-flex align-items-center justify-content-center flex-column">
+    <img src="/assets/images/spacefeed-white.png" class="img-fluid mb-5" width="240">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
@@ -13,7 +14,7 @@
                     </div>
 
                     <!-- Formulário de Login -->
-                    <form is="dmx-serverconnect-form" id="login_form" method="post" action="api/auth/login" dmx-on:success="location.href = '/dashboard'">
+                    <form is="dmx-serverconnect-form" id="login_form" method="post" action="/api/autenticacao/login" dmx-on:error="alertas.danger('Ocorreu um erro!')" dmx-on:success="alertas.success('Login com sucesso!')">
                         <div class="mb-3">
                             <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Endereço de e-mail" required>
                         </div>
@@ -53,7 +54,7 @@
                     <!-- Link para cadastro -->
                     <div class="text-center mt-4">
                         <p class="mb-0">Não tem uma conta? </p>
-                        <a href="/sign-up">Your link title</a>
+                        <a href="/sign-up">Crie uma agora!</a>
                     </div>
                 </div>
             </div>
