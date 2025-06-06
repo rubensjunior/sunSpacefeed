@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "usuario_logado",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "dados_usuario",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "id_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_completo"
+              },
+              {
+                "table": "usuarios",
+                "column": "email"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_tratamento"
+              },
+              {
+                "table": "usuarios",
+                "column": "tipo_usuario"
+              },
+              {
+                "table": "empresas",
+                "column": "*"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{usuario_logado}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [
+              {
+                "table": "empresas",
+                "column": "*",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "empresas",
+                      "column": "id_empresa",
+                      "operation": "=",
+                      "operator": "equal",
+                      "value": {
+                        "table": "usuarios",
+                        "column": "ref_id_empresa_ativa",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                },
+                "primary": "id_empresa"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{usuario_logado}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"email\", \"usuarios\".\"nome_tratamento\", \"usuarios\".\"tipo_usuario\", \"empresas\".* from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_completo"
+          },
+          {
+            "type": "text",
+            "name": "email"
+          },
+          {
+            "type": "text",
+            "name": "nome_tratamento"
+          },
+          {
+            "type": "text",
+            "name": "tipo_usuario"
+          },
+          {
+            "type": "text",
+            "name": "id_empresa"
+          },
+          {
+            "type": "datetime",
+            "name": "created_at_empresa"
+          },
+          {
+            "type": "text",
+            "name": "razao_social"
+          },
+          {
+            "type": "text",
+            "name": "nome_fantasia"
+          },
+          {
+            "type": "text",
+            "name": "nome_polo"
+          },
+          {
+            "type": "text",
+            "name": "cnpj"
+          },
+          {
+            "type": "text",
+            "name": "cep"
+          },
+          {
+            "type": "text",
+            "name": "whatsapp"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          },
+          {
+            "type": "text",
+            "name": "logradouro"
+          },
+          {
+            "type": "text",
+            "name": "numero"
+          },
+          {
+            "type": "text",
+            "name": "complemento"
+          },
+          {
+            "type": "text",
+            "name": "bairro"
+          },
+          {
+            "type": "text",
+            "name": "cidade"
+          },
+          {
+            "type": "text",
+            "name": "uf"
+          }
+        ],
+        "type": "dbconnector_single",
+        "outputType": "object"
+      }
+    ]
+  }
+}
