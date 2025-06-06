@@ -21,6 +21,8 @@
 </head>
 
 <body is="dmx-app" id="backoffice">
+  <dmx-serverconnect id="atualizarempresausuario" url="/api/negocios/selecionar-empresa" noload="true"></dmx-serverconnect>
+
   <dmx-notifications id="alertas"></dmx-notifications>
   <div is="dmx-browser" id="navegacao"></div>
   <dmx-serverconnect id="deslogar" noload="true" url="/api/autenticacao/logout" credentials="true" dmx-on:success="navegacao.goto('/')"></dmx-serverconnect>
@@ -30,14 +32,14 @@
     <div class="container py-3">
       <div class="row align-items-center">
         <div class="col-auto">
-          <a href="/backoffice/" internal="true"><img src="/assets/images/Ícone 2_fundo preto.png" width="56"></a>
+          <a href="/security/backoffice/" internal="true"><img src="/assets/images/Ícone 2_fundo preto.png" width="56"></a>
         </div>
         <div class="col-auto">
           <div class="input-group input-group-lg" style="width: 280px;">
-            <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa">
+            <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa" id="empresas" name="empresas">
               <option value="">Selecione uma empresa</option>
             </select>
-            <button class="btn btn-primary fs-7" title="Confirmar seleção"><i class="fas fa-check"></i></button>
+            <button class="btn btn-primary fs-7" title="Confirmar seleção" dmx-on:click="atualizarempresausuario.load({id_empresa_selecionada: empresas.selectedValue})"><i class="fas fa-check"></i></button>
           </div>
         </div>
         <div class="col d-flex justify-content-end">
@@ -89,19 +91,22 @@
         </div>
         <div class="col-auto">
           <!-- Support Button -->
-          <button class="btn btn-orange fs-7 h-100 px-4" style="height: calc(2.5rem + 2px);">
-            <i class="fas fa-headset"></i>
-            <span class="ms-2">Suporte</span>
-          </button>
+          <button class="btn btn-orange fs-7 h-100 px-4" style="height: calc(2.5rem + 2px);"><i class="fas fa-headset"></i>
+            <span class="ms-2">Ajuda</span></button>
         </div>
       </div>
     </div>
   </div>
 
-  <main is="dmx-view" id="content">
-    <%- await include(content, locals); %>
-  </main>
-  <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+  <main class="container mt-4">
+    <div class="row">
+      <div class="col" is="dmx-view" id="content">
+        <%- await include(content, locals); %>
+      </div>
+    </div>
+    </div>
+    </div>
+    <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
