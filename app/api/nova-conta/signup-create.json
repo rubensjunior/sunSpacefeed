@@ -19,12 +19,7 @@
         "type": "text",
         "fieldName": "razao_social",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe a razão social"
-            }
-          }
+          "rules": {}
         },
         "name": "razao_social"
       },
@@ -32,12 +27,7 @@
         "type": "text",
         "fieldName": "nome_fantasia",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o nome fantasia"
-            }
-          }
+          "rules": {}
         },
         "name": "nome_fantasia"
       },
@@ -45,12 +35,7 @@
         "type": "text",
         "fieldName": "nome_polo",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o nome do polo"
-            }
-          }
+          "rules": {}
         },
         "name": "nome_polo"
       },
@@ -58,12 +43,7 @@
         "type": "text",
         "fieldName": "cnpj",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o CNPJ"
-            }
-          }
+          "rules": {}
         },
         "name": "cnpj"
       },
@@ -71,12 +51,7 @@
         "type": "text",
         "fieldName": "whatsapp",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o WhatsApp"
-            }
-          }
+          "rules": {}
         },
         "name": "whatsapp"
       },
@@ -84,12 +59,7 @@
         "type": "text",
         "fieldName": "logradouro",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o endereço"
-            }
-          }
+          "rules": {}
         },
         "name": "logradouro"
       },
@@ -97,12 +67,7 @@
         "type": "text",
         "fieldName": "numero",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o número"
-            }
-          }
+          "rules": {}
         },
         "name": "numero"
       },
@@ -110,12 +75,7 @@
         "type": "text",
         "fieldName": "cep",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o CEP"
-            }
-          }
+          "rules": {}
         },
         "name": "cep"
       },
@@ -128,12 +88,7 @@
         "type": "text",
         "fieldName": "bairro",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe o bairro"
-            }
-          }
+          "rules": {}
         },
         "name": "bairro"
       },
@@ -141,12 +96,7 @@
         "type": "text",
         "fieldName": "cidade",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe a cidade"
-            }
-          }
+          "rules": {}
         },
         "name": "cidade"
       },
@@ -154,12 +104,7 @@
         "type": "text",
         "fieldName": "nome_completo",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe seu nome completo"
-            }
-          }
+          "rules": {}
         },
         "name": "nome_completo"
       },
@@ -167,12 +112,7 @@
         "type": "text",
         "fieldName": "nome_tratamento",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe como deseja ser chamado"
-            }
-          }
+          "rules": {}
         },
         "name": "nome_tratamento"
       },
@@ -180,13 +120,7 @@
         "type": "text",
         "fieldName": "email",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe um email válido"
-            },
-            "core:email": {}
-          }
+          "rules": {}
         },
         "name": "email"
       },
@@ -194,12 +128,7 @@
         "type": "text",
         "fieldName": "senha",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, informe uma senha"
-            }
-          }
+          "rules": {}
         },
         "name": "senha"
       },
@@ -207,12 +136,7 @@
         "type": "text",
         "fieldName": "confirmar_senha",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, confirme sua senha"
-            }
-          }
+          "rules": {}
         },
         "name": "confirmar_senha"
       },
@@ -220,12 +144,7 @@
         "type": "number",
         "fieldName": "polos_adicionais",
         "options": {
-          "rules": {
-            "core:number": {},
-            "core:min": {
-              "param": "0"
-            }
-          }
+          "rules": {}
         },
         "name": "polos_adicionais"
       },
@@ -234,9 +153,7 @@
         "fieldName": "valor_plano",
         "multiple": true,
         "options": {
-          "rules": {
-            "core:number": {}
-          }
+          "rules": {}
         },
         "name": "valor_plano"
       },
@@ -260,12 +177,7 @@
         "type": "text",
         "fieldName": "estado",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, selecione o estado"
-            }
-          }
+          "rules": {}
         },
         "name": "estado"
       },
@@ -273,12 +185,7 @@
         "type": "text",
         "fieldName": "plano",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Por favor, selecione um plano"
-            }
-          }
+          "rules": {}
         },
         "name": "plano"
       },
@@ -678,9 +585,27 @@
               },
               {
                 "table": "planos_contratados",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{insert_empresa.identity}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "ref_id_usuario_admin",
+                "type": "text",
+                "value": "{{insert_usuario.identity}}"
+              },
+              {
+                "table": "planos_contratados",
                 "column": "polos_adicionais",
                 "type": "number",
                 "value": "{{$_POST.polos_adicionais}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "valor_total",
+                "type": "number",
+                "value": "{{$_POST.valor_total}}"
               },
               {
                 "table": "planos_contratados",
@@ -693,29 +618,11 @@
                 "column": "data_contratacao",
                 "type": "datetime",
                 "value": "{{NOW}}"
-              },
-              {
-                "table": "planos_contratados",
-                "column": "ref_id_empresa",
-                "type": "text",
-                "value": "{{insert_empresa.identity}}"
-              },
-              {
-                "table": "planos_contratados",
-                "column": "valor_total",
-                "type": "number",
-                "value": "{{$_POST.valor_total}}"
-              },
-              {
-                "table": "planos_contratados",
-                "column": "ref_id_usuario_admin",
-                "type": "text",
-                "value": "{{insert_usuario.identity}}"
               }
             ],
             "table": "planos_contratados",
             "returning": "id",
-            "query": "insert into \"planos_contratados\" (\"data_contratacao\", \"polos_adicionais\", \"ref_id_empresa\", \"ref_id_plano\", \"ref_id_usuario_admin\", \"status_plano\", \"valor_total\") values (?, ?, ?, ?, ?, ?, ?) returning \"id\"",
+            "query": "insert into \"planos_contratados\" (\"data_contratacao\", \"polos_adicionais\", \"ref_id_empresa\", \"ref_id_plano\", \"ref_id_usuario_admin\", \"status_plano\", \"valor_total\") values (?, ?, ?, ?, ?, ?, ?)",
             "params": [
               {
                 "name": ":P1",
@@ -726,37 +633,37 @@
               {
                 "name": ":P2",
                 "type": "expression",
-                "value": "{{$_POST.polos_adicionais}}",
+                "value": "{{insert_empresa.identity}}",
                 "test": ""
               },
               {
                 "name": ":P3",
                 "type": "expression",
-                "value": "{{'Ativo'}}",
+                "value": "{{insert_usuario.identity}}",
                 "test": ""
               },
               {
                 "name": ":P4",
                 "type": "expression",
-                "value": "{{NOW}}",
+                "value": "{{$_POST.polos_adicionais}}",
                 "test": ""
               },
               {
                 "name": ":P5",
                 "type": "expression",
-                "value": "{{insert_empresa.identity}}",
+                "value": "{{$_POST.valor_total}}",
                 "test": ""
               },
               {
                 "name": ":P6",
                 "type": "expression",
-                "value": "{{$_POST.valor_total}}",
+                "value": "{{'Ativo'}}",
                 "test": ""
               },
               {
                 "name": ":P7",
                 "type": "expression",
-                "value": "{{insert_usuario.identity}}",
+                "value": "{{NOW}}",
                 "test": ""
               }
             ]

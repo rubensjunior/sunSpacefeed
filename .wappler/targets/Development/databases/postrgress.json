@@ -48,9 +48,44 @@
               "onDelete": "RESTRICT"
             }
           },
+          "ref_id_empresa": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_empresa",
+              "inTable": "empresas",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "CASCADE"
+            }
+          },
+          "ref_id_usuario_admin": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_usuario",
+              "inTable": "usuarios",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "SET NULL"
+            }
+          },
           "polos_adicionais": {
             "db": {
               "type": "integer",
+              "default": 0,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "valor_total": {
+            "db": {
+              "type": "decimal",
               "default": 0,
               "primary": false,
               "unique": false,
@@ -75,20 +110,7 @@
               "useTz": true,
               "primary": false,
               "unique": false,
-              "nullable": false
-            }
-          },
-          "ref_id_empresa": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_empresa",
-              "inTable": "empresas",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "NO ACTION"
+              "nullable": true
             }
           },
           "data_cancelamento": {
@@ -100,32 +122,7 @@
               "comment": "Data em que o plano foi cancelado, se aplicável",
               "nullable": true
             }
-          },
-          "valor_total": {
-            "db": {
-              "type": "decimal",
-              "default": 0,
-              "primary": false,
-              "unique": false,
-              "nullable": false
-            }
-          },
-          "ref_id_usuario_admin": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_usuario",
-              "inTable": "usuarios",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "SET NULL"
-            }
           }
-        },
-        "refs": {
-          "log_planos_contratados": "ref_id_plano_contratado"
         }
       },
       "storage.buckets": {
@@ -152,9 +149,6 @@
         "db": {},
         "parent": "s3_multipart_uploads"
       },
-      "pgsodium.key": {
-        "db": {}
-      },
       "auth.saml_providers": {
         "db": {}
       },
@@ -168,6 +162,107 @@
         "db": {},
         "refs": {
           "auth.saml_relay_states": "flow_state_id"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "uuid",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "uuid",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "auth_code": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "code_challenge_method": {
+            "db": {
+              "type": "auth.code_challenge_method",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "code_challenge": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "provider_type": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "provider_access_token": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "provider_refresh_token": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "updated_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "authentication_method": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "auth_code_issued_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
         }
       },
       "auth.identities": {
@@ -246,6 +341,9 @@
         "db": {}
       },
       "realtime.subscription": {
+        "db": {}
+      },
+      "pgsodium.key": {
         "db": {}
       },
       "vault.secrets": {

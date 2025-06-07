@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cnpj" class="form-label">CNPJ</label>
-                                    <input type="text" class="form-control" id="cnpj" name="cnpj" required="" data-msg-required="Por favor, informe o CNPJ" placeholder="00.000.000/0000-00">
+                                    <input type="text" class="form-control" id="cnpj" name="cnpj" required="" data-msg-required="Por favor, informe o CNPJ" placeholder="00.000.000/0000-00" readonly="true" dmx-bind:value="cnpj_check_form.check_cnpj.value">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="whatsapp" class="form-label">WhatsApp</label>
@@ -240,7 +240,7 @@
 
 
                                     </div>
-                                    <input id="id_plano_escolhido" name="id_plano_escolhido" type="text" class="form-control" dmx-bind:value="data_detail_plano_escolhido.data.id_plano">
+                                    <input id="id_plano_escolhido" name="id_plano_escolhido" type="hidden" class="form-control" dmx-bind:value="data_detail_plano_escolhido.data.id_plano">
                                 </div>
                             </div>
                         </div>
