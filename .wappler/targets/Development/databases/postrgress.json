@@ -179,12 +179,6 @@
           "comment": "This table holds metadata for derived keys given a key_id and key_context. The raw key is never stored."
         }
       },
-      "vault.secrets": {
-        "db": {
-          "schema": "vault",
-          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
-        }
-      },
       "realtime.messages_2025_05_12": {
         "db": {
           "schema": "realtime"
@@ -223,6 +217,12 @@
       "realtime.subscription": {
         "db": {
           "schema": "realtime"
+        }
+      },
+      "vault.secrets": {
+        "db": {
+          "schema": "vault",
+          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
         }
       },
       "comentarios_postagens": {
@@ -796,8 +796,7 @@
         },
         "refs": {
           "comentarios_postagens": "ref_id_usuario",
-          "fcm_tokens": "ref_id_usuario",
-          "planos_contratados": "ref_id_usuario_admin"
+          "fcm_tokens": "ref_id_usuario"
         },
         "sub": {
           "usuarios_empresas": "ref_id_usuario"
