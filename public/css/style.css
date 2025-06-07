@@ -38,6 +38,81 @@ header {
   background-color: var(--sp-primary);
 }
 
+/* Steps Container Styles */
+.steps-container {
+  margin: 2rem 0;
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+.progress-line {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.steps {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 2;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  background: var(--sp-container);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  margin: 0 auto 0.5rem;
+}
+
+.step.active .step-circle {
+  background: var(--sp-primary);
+  border-color: var(--sp-primary);
+}
+
+.step.complete .step-circle {
+  background: #3699FF;
+  border-color: #3699FF;
+}
+
+.step-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.step.active .step-label {
+  color: var(--sp-primary);
+}
+
+.step.complete .step-label {
+  color: #3699FF;
+}
+
 /* Font Sizes */
 .fs-7 {
   font-size: 0.875rem !important;
@@ -115,6 +190,22 @@ header {
 }
 
 /* Add placeholder styles */
+.form-control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
 .form-control::placeholder {
   color: rgba(255, 255, 255, 0.5);
   opacity: 1;
@@ -140,7 +231,8 @@ header {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: var(--sp-primary);
   color: #fff;
-  box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+          box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
 }
 
 .form-select option {
@@ -200,6 +292,7 @@ header {
   color: rgba(255, 255, 255, 0.8);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
+  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
 
@@ -220,7 +313,8 @@ header {
   }
 
   .menu-header .btn-dark:focus {
-    box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+    -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
   }
 
   .offcanvas {
