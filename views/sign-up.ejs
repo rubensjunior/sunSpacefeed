@@ -227,12 +227,18 @@
                                             <input type="number" step="0.01" class="form-control text-end border-0 bg-transparent ps-0 pe-2" style="width: 100px;" id="valor_polos" placeholder="0" readonly dmx-bind:value="(data_detail_plano_escolhido.data.valor_polo_extra * polos_adicionais.value).toNumber().toFixed(2)">
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center flex-row justify-content-between p-3 rounded-3 border border-opacity-10 border-light" id="resumo" style="background-color: var(--sp-container)">
+                                    <div class="d-flex align-items-center flex-row justify-content-between p-3 rounded-3 border border-opacity-10 border-light mb-3" id="resumo" style="background-color: var(--sp-container)">
                                         <h5 class="m-0">Total</h5>
                                         <div class="input-group" style="width: 140px;">
                                             <span class="input-group-text text-white border-0 bg-transparent px-2">R$</span>
                                             <input type="number" step="0.01" class="form-control text-end border-0 bg-transparent ps-0 pe-2" style="width: 100px;" id="valor_total" placeholder="0" readonly dmx-bind:value="(data_detail_plano_escolhido.data.valor_base.toNumber() + (data_detail_plano_escolhido.data.valor_polo_extra.toNumber() * polos_adicionais.value)).toFixed(2)">
                                         </div>
+                                    </div>
+                                    <div class="d-flex align-items-center p-3 rounded-3 border border-opacity-10 border-light flex-column justify-content-center" id="resumo1" style="background-color: var(--sp-container)">
+                                        <p class="text-center m-0">Ao clicar em "Criar conta", você concorda com os Termos de Uso e Política de Privacidade da plataforma.</p>
+                                        <p class="text-center m-0">Pagamento 100% seguro, processado pela plataforma Asaas. Nenhuma informação bancária é armazenada em nossos sistemas.</p>
+
+
                                     </div>
                                 </div>
                             </div>
