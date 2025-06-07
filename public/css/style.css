@@ -25,7 +25,7 @@ header {
   border-radius: 0.5rem;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .menu-header .nav-link:hover {
@@ -176,6 +176,10 @@ header {
   transition: all 0.2s ease-in-out;
 }
 
+.input-group-lg .form-select {
+  min-height: 50px;
+}
+
 .form-control:focus,
 .form-select:focus {
   background-color: rgba(255, 255, 255, 0.1);
@@ -272,6 +276,7 @@ header {
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   transition: all 0.2s ease-in-out;
+  font-size: 1rem;
 }
 
 .offcanvas .nav-link:hover,
