@@ -18,6 +18,7 @@
   <script src="/dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
   <link rel="stylesheet" href="/dmxAppConnect/dmxNotifications/dmxNotifications.css" />
   <script src="/dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice">
@@ -28,34 +29,38 @@
   <dmx-serverconnect id="deslogar" noload="true" url="/api/autenticacao/logout" credentials="true" dmx-on:success="navegacao.goto('/')"></dmx-serverconnect>
   <dmx-serverconnect id="minhasempresas" url="/api/negocios/listar-empresa"></dmx-serverconnect>
   <dmx-serverconnect id="meuusuario" credentials="true" url="/api/autenticacao/usuario-logado"></dmx-serverconnect>
+
   <header>
     <div class="container py-3">
-      <div class="row align-items-center">
-        <div class="col-auto">
-          <a href="/security/backoffice/" internal="true"><img src="/assets/images/Ícone 2_fundo preto.png" width="56"></a>
+      <div class="row g-3 align-items-center">
+        <div class="col-6 col-md-auto d-flex align-items-center order-1">
+          <a href="/security/backoffice/" class="d-flex align-items-center" internal="true">
+            <img src="/assets/images/Ícone 2_fundo preto.png" width="56">
+          </a>
         </div>
-        <div class="col-auto">
-          <div class="input-group input-group-lg" style="width: 280px;">
+
+        <div class="col-12 col-md-auto order-3 order-md-2">
+          <div class="input-group input-group-lg" style="min-width: 280px;">
             <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa" id="empresas" name="empresas">
               <option value="">Selecione uma empresa</option>
             </select>
-            <button class="btn btn-primary fs-7" title="Confirmar seleção" dmx-on:click="atualizarempresausuario.load({id_empresa_selecionada: empresas.selectedValue})"><i class="fas fa-check"></i></button>
+            <button class="btn btn-primary fs-7 px-3" title="Confirmar seleção" dmx-on:click="atualizarempresausuario.load({id_empresa_selecionada: empresas.selectedValue})">
+              <i class="fas fa-check"></i>
+            </button>
           </div>
         </div>
-        <div class="col d-flex justify-content-end">
-          <!-- User Profile Dropdown -->
+        <div class="col-6 col-md-auto d-flex justify-content-end order-2 order-md-3 ms-md-auto">
           <div class="dropdown">
             <button class="btn btn-profile dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="d-flex align-items-center">
                 <img src="/assets/images/avatar.png" alt="Profile" class="rounded" width="40" height="40" style="object-fit: cover">
-                <div class="ms-2 text-start" style="min-width: 120px">
+                <div class="ms-2 text-start d-none d-sm-block" style="min-width: 120px">
                   <span class="d-block fw-semibold fs-7 text-white">{{meuusuario.data.dados_usuario.nome_tratamento}}</span>
                   <small class="d-block fs-8 text-white">{{meuusuario.data.dados_usuario.nome_polo}}</small>
                 </div>
               </div>
             </button>
             <div class="dropdown-menu dropdown-menu-end">
-              <!-- User Profile Card in Dropdown -->
               <div class="p-3" style="background-color: var(--sp-container);">
                 <div class="d-flex align-items-center">
                   <img src="/assets/images/avatar.png" alt="Profile" class="rounded" width="40" height="40" style="object-fit: cover">
@@ -77,23 +82,43 @@
   </header>
 
   <!-- Second Header -->
-  <div class="menu-header" style="background-color: var(--sp-navbar);">
+  <div class="menu-header">
     <div class="container py-3">
-      <div class="row align-items-center">
-        <div class="col">
-          <nav class="nav gap-2">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-auto d-md-none">
+          <button class="btn btn-dark border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <div class="col d-none d-md-block">
+          <nav class="nav gap-2 flex-wrap">
             <a class="nav-link" href="/security/backoffice/colaboradores" internal="true">Colaboradores</a>
             <a class="nav-link" href="/security/backoffice/unidades-polos" internal="true">Unidades/Polos</a>
             <a class="nav-link" href="/security/backoffice/postagens" internal="true">Postagens</a>
-            <a class="nav-link" href="/security/backoffice/notificacoes-push" internal="true">Notificações Push<br></a>
+            <a class="nav-link" href="/security/backoffice/notificacoes-push" internal="true">Notificações Push</a>
             <a class="nav-link" href="/security/backoffice/suporte-aluno" internal="true">Suporte ao aluno</a>
           </nav>
         </div>
-        <div class="col-auto">
-          <!-- Support Button -->
-          <button class="btn btn-orange fs-7 h-100 px-4" style="height: calc(2.5rem + 2px);"><i class="fas fa-headset"></i>
-            <span class="ms-2">Ajuda</span></button>
+        <div class="col-auto ms-auto">
+          <button class="btn btn-orange fs-7 h-100 px-4" style="height: calc(2.5rem + 2px);"><i class="fas fa-headset"></i></button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="menuOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav flex-column">
+        <a class="nav-link" href="/security/backoffice/colaboradores" internal="true">Colaboradores</a>
+        <a class="nav-link" href="/security/backoffice/unidades-polos" internal="true">Unidades/Polos</a>
+        <a class="nav-link" href="/security/backoffice/postagens" internal="true">Postagens</a>
+        <a class="nav-link" href="/security/backoffice/notificacoes-push" internal="true">Notificações Push</a>
+        <a class="nav-link" href="/security/backoffice/suporte-aluno" internal="true">Suporte ao aluno</a>
       </div>
     </div>
   </div>
@@ -104,9 +129,9 @@
         <%- await include(content, locals); %>
       </div>
     </div>
-    </div>
-    </div>
-    <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+  </main>
+
+  <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
