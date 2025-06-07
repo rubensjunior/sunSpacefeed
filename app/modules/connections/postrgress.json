@@ -11,6 +11,9 @@
       "password": "@Bakihamma025@",
       "database": "postgres"
     },
-    "tz": "utc"
-  }
+    "meta": {}
+  },
+  "serverType": "node",
+  "fileName": "postrgress.json",
+  "actionFilePath": "file:///C:/Users/Rubens%20Bentes/Documents/Projetos/sunSpacefeed/app/modules/connections/postrgress.json"
 }

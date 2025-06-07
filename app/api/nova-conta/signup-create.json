@@ -1,8 +1,8 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/criar-conta.ejs",
-      "linkedForm": "empresa_form"
+      "linkedFile": "/views/sign-up.ejs",
+      "linkedForm": "signup_form"
     },
     "$_GET": [
       {
@@ -19,7 +19,12 @@
         "type": "text",
         "fieldName": "razao_social",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe a razão social"
+            }
+          }
         },
         "name": "razao_social"
       },
@@ -27,7 +32,12 @@
         "type": "text",
         "fieldName": "nome_fantasia",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o nome fantasia"
+            }
+          }
         },
         "name": "nome_fantasia"
       },
@@ -35,7 +45,12 @@
         "type": "text",
         "fieldName": "nome_polo",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o nome do polo"
+            }
+          }
         },
         "name": "nome_polo"
       },
@@ -43,7 +58,12 @@
         "type": "text",
         "fieldName": "cnpj",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o CNPJ"
+            }
+          }
         },
         "name": "cnpj"
       },
@@ -51,7 +71,12 @@
         "type": "text",
         "fieldName": "whatsapp",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o WhatsApp"
+            }
+          }
         },
         "name": "whatsapp"
       },
@@ -59,7 +84,12 @@
         "type": "text",
         "fieldName": "logradouro",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o endereço"
+            }
+          }
         },
         "name": "logradouro"
       },
@@ -67,7 +97,12 @@
         "type": "text",
         "fieldName": "numero",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o número"
+            }
+          }
         },
         "name": "numero"
       },
@@ -75,7 +110,12 @@
         "type": "text",
         "fieldName": "cep",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o CEP"
+            }
+          }
         },
         "name": "cep"
       },
@@ -88,7 +128,12 @@
         "type": "text",
         "fieldName": "bairro",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o bairro"
+            }
+          }
         },
         "name": "bairro"
       },
@@ -96,7 +141,12 @@
         "type": "text",
         "fieldName": "cidade",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe a cidade"
+            }
+          }
         },
         "name": "cidade"
       },
@@ -104,7 +154,12 @@
         "type": "text",
         "fieldName": "nome_completo",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe seu nome completo"
+            }
+          }
         },
         "name": "nome_completo"
       },
@@ -112,7 +167,12 @@
         "type": "text",
         "fieldName": "nome_tratamento",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe como deseja ser chamado"
+            }
+          }
         },
         "name": "nome_tratamento"
       },
@@ -120,7 +180,13 @@
         "type": "text",
         "fieldName": "email",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe um email válido"
+            },
+            "core:email": {}
+          }
         },
         "name": "email"
       },
@@ -128,7 +194,12 @@
         "type": "text",
         "fieldName": "senha",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe uma senha"
+            }
+          }
         },
         "name": "senha"
       },
@@ -136,7 +207,12 @@
         "type": "text",
         "fieldName": "confirmar_senha",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, confirme sua senha"
+            }
+          }
         },
         "name": "confirmar_senha"
       },
@@ -144,15 +220,23 @@
         "type": "number",
         "fieldName": "polos_adicionais",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:number": {},
+            "core:min": {
+              "param": "0"
+            }
+          }
         },
         "name": "polos_adicionais"
       },
       {
         "type": "number",
         "fieldName": "valor_plano",
+        "multiple": true,
         "options": {
-          "rules": {}
+          "rules": {
+            "core:number": {}
+          }
         },
         "name": "valor_plano"
       },
@@ -176,7 +260,12 @@
         "type": "text",
         "fieldName": "estado",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, selecione o estado"
+            }
+          }
         },
         "name": "estado"
       },
@@ -184,9 +273,19 @@
         "type": "text",
         "fieldName": "plano",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, selecione um plano"
+            }
+          }
         },
         "name": "plano"
+      },
+      {
+        "type": "text",
+        "fieldName": "id_plano_escolhido",
+        "name": "id_plano_escolhido"
       }
     ]
   },
@@ -573,43 +672,55 @@
             "values": [
               {
                 "table": "planos_contratados",
-                "column": "ref_id_usuario_admin",
+                "column": "ref_id_plano",
                 "type": "text",
-                "value": "{{insert_usuario.identity}}"
+                "value": "{{$_POST.id_plano_escolhido}}"
               },
               {
                 "table": "planos_contratados",
-                "column": "qtd_polos_adicionais",
+                "column": "polos_adicionais",
                 "type": "number",
                 "value": "{{$_POST.polos_adicionais}}"
               },
               {
                 "table": "planos_contratados",
-                "column": "valor_base_mensal",
-                "type": "number",
-                "value": "{{$_POST.valor_plano}}"
+                "column": "status_plano",
+                "type": "text",
+                "value": "{{'Ativo'}}"
               },
               {
                 "table": "planos_contratados",
-                "column": "valor_polo_extra",
-                "type": "number",
-                "value": "{{$_POST.valor_polos}}"
+                "column": "data_contratacao",
+                "type": "datetime",
+                "value": "{{NOW}}"
               },
               {
                 "table": "planos_contratados",
                 "column": "ref_id_empresa",
                 "type": "text",
                 "value": "{{insert_empresa.identity}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "valor_total",
+                "type": "number",
+                "value": "{{$_POST.valor_total}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "ref_id_usuario_admin",
+                "type": "text",
+                "value": "{{insert_usuario.identity}}"
               }
             ],
             "table": "planos_contratados",
-            "returning": "id_plano_contratado",
-            "query": "insert into \"planos_contratados\" (\"qtd_polos_adicionais\", \"ref_id_empresa\", \"ref_id_usuario_admin\", \"valor_base_mensal\", \"valor_polo_extra\") values (?, ?, ?, ?, ?) returning \"id_plano_contratado\"",
+            "returning": "id",
+            "query": "insert into \"planos_contratados\" (\"data_contratacao\", \"polos_adicionais\", \"ref_id_empresa\", \"ref_id_plano\", \"ref_id_usuario_admin\", \"status_plano\", \"valor_total\") values (?, ?, ?, ?, ?, ?, ?) returning \"id\"",
             "params": [
               {
                 "name": ":P1",
                 "type": "expression",
-                "value": "{{insert_usuario.identity}}",
+                "value": "{{$_POST.id_plano_escolhido}}",
                 "test": ""
               },
               {
@@ -621,19 +732,31 @@
               {
                 "name": ":P3",
                 "type": "expression",
-                "value": "{{$_POST.valor_plano}}",
+                "value": "{{'Ativo'}}",
                 "test": ""
               },
               {
                 "name": ":P4",
                 "type": "expression",
-                "value": "{{$_POST.valor_polos}}",
+                "value": "{{NOW}}",
                 "test": ""
               },
               {
                 "name": ":P5",
                 "type": "expression",
                 "value": "{{insert_empresa.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{$_POST.valor_total}}",
+                "test": ""
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{insert_usuario.identity}}",
                 "test": ""
               }
             ]
