@@ -2,7 +2,9 @@
   "bootstrap5": {
     "basic": {
       "enable-shadows": true,
-      "enable-gradients": true
+      "enable-gradients": true,
+      "headings-font-family": "Inter:400",
+      "font-family-base": "Inter:400"
     },
     "advanced": {}
   }

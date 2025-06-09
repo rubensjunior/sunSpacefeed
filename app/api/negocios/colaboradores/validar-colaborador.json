@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "email_novo_usuario"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "empresa_usuario_atual"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "buscar_usuario",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "id_usuario"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.email_novo_usuario}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.email",
+                  "field": "usuarios.email",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_GET.email_novo_usuario}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "email",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "text",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "email"
+                    }
+                  },
+                  "operation": "=",
+                  "table": "usuarios"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"id_usuario\" from \"usuarios\" where \"usuarios\".\"email\" = ?"
+          }
+        },
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "usuario_empresas",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios_empresas",
+                "column": "cargo_usuario_empresa"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{buscar_usuario.id_usuario}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_GET.empresa_usuario_atual}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios_empresas"
+            },
+            "primary": "id_usuario_empresa",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios_empresas.ref_id_usuario",
+                  "field": "usuarios_empresas.ref_id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{buscar_usuario.id_usuario}}",
+                  "data": {
+                    "table": "usuarios_empresas",
+                    "column": "ref_id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": false,
+                      "references": "id_usuario",
+                      "inTable": "usuarios",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "CASCADE",
+                      "name": "ref_id_usuario"
+                    }
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "usuarios_empresas.ref_id_empresa",
+                  "field": "usuarios_empresas.ref_id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_GET.empresa_usuario_atual}}",
+                  "data": {
+                    "table": "usuarios_empresas",
+                    "column": "ref_id_empresa",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": false,
+                      "references": "id_empresa",
+                      "inTable": "empresas",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "CASCADE",
+                      "name": "ref_id_empresa"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"cargo_usuario_empresa\", \"status_usuario\" from \"usuarios_empresas\" where \"usuarios_empresas\".\"ref_id_usuario\" = ? and \"usuarios_empresas\".\"ref_id_empresa\" = ?"
+          }
+        },
+        "output": false,
+        "meta": [
+          {
+            "type": "text",
+            "name": "cargo_usuario_empresa"
+          },
+          {
+            "type": "text",
+            "name": "status_usuario"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}

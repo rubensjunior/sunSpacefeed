@@ -1,13 +1,65 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaboradores" appConnect="local" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaboradores" appConnect="local" components="{dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/security/backoffice/colaboradores">
-<main>
-    <div class="jumbotron">
-        <h1 class="display-3">Colaboradores</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p>
+<div class="modal" id="criar_modal_colaborador" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content sp-container border-0">
+            <div class="modal-header border-bottom border-secondary">
+                <h5 class="modal-title text-white">Novo Colaborador</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-white">
+                <form id="validar_usuario">
+                    <div class="form-group mb-3"> <label for="input1" class="form-label">E-mail</label>
+                        <input type="text" class="form-control mb-3" id="input1" name="input1" aria-describedby="input1_help" placeholder="Insira o e-mail do colaborador">
+                        <button id="btn2" class="btn btn-primary">Validar</button>
+                    </div>
+                </form>
+                <form id="criar_usuario">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="input2" class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" id="input2" name="input2" aria-describedby="input2_help" placeholder="Enter some text">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="input3" class="form-label">Nome de tratamento</label>
+                                <input type="text" class="form-control" id="input3" name="input2" aria-describedby="input2_help1" placeholder="Enter some text">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="input4" class="form-label">E-mail</label>
+                                <input type="text" class="form-control" id="input4" name="input2" aria-describedby="input2_help2" placeholder="Enter some text">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="input5" class="form-label">Função</label>
+                                <select id="select1" class="form-select">
+                                    <option value="1">Option One</option>
+                                    <option value="2">Option Two</option>
+                                    <option value="3">Option Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3"> <button id="btn3" class="btn btn-primary">Cadastrar</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
     </div>
-</main>
+</div>
+<div class="d-flex flex-row align-items-center justify-content-between">
+    <div class="d-flex flex-column justify-content-start align-items-start">
+        <h5 class="m-0 fw-bolder">Colaboradores</h5>
+        <p class="sub-titulo mt-1">Gestão de contas e acessos</p>
+    </div>
+    <div class="d-flex align-items-center">
+        <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criar_modal_colaborador">Adicionar</button>
+    </div>
+</div>

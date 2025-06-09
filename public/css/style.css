@@ -6,6 +6,7 @@
   --sp-primary-hover: #187DE4;
   --sp-support: #FF9F43;
   --sp-support-hover: #FF8510;
+  --sp-nav:#1C1D24;
 }
 
 body {
@@ -17,10 +18,13 @@ body {
 header {
   background-color: var(--sp-background) !important;
 }
-
+.sub-titulo{
+  font-size: 14px;
+  color: #9a9cae;
+}
 /* Menu Header Nav Links */
 .menu-header .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: #9a9cae;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   -webkit-transition: all 0.2s ease-in-out;
@@ -30,12 +34,12 @@ header {
 
 .menu-header .nav-link:hover {
   color: #fff;
-  background-color: var(--sp-primary);
+  background-color: var(--sp-nav);
 }
 
 .menu-header .nav-link.active {
   color: #fff;
-  background-color: var(--sp-primary);
+  background-color: var(--sp-nav);
 }
 
 /* Steps Container Styles */
@@ -57,8 +61,12 @@ header {
 
 .steps {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   z-index: 2;
 }
 
@@ -70,9 +78,15 @@ header {
 .step-circle {
   width: 40px;
   height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-radius: 50%;
   background: var(--sp-container);
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -190,6 +204,22 @@ header {
 }
 
 /* Add placeholder styles */
+.form-control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.form-control::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
 .form-control::placeholder {
   color: rgba(255, 255, 255, 0.5);
   opacity: 1;
@@ -215,7 +245,8 @@ header {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: var(--sp-primary);
   color: #fff;
-  box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+          box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
 }
 
 .form-select option {
@@ -257,6 +288,33 @@ header {
   text-align: center;
 }
 
+/* Modal Styles */
+.modal-content.sp-container {
+  padding: 0;
+}
+
+.modal-header {
+  padding: 1.5rem 2rem;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+}
+
+.modal .btn-dark {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal .btn-dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Offcanvas Styles */
 .offcanvas {
   background-color: var(--sp-navbar);
@@ -275,6 +333,7 @@ header {
   color: rgba(255, 255, 255, 0.8);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
+  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   font-size: 1rem;
 }
@@ -296,7 +355,8 @@ header {
   }
 
   .menu-header .btn-dark:focus {
-    box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+    -webkit-box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(54, 153, 255, 0.25);
   }
 
   .offcanvas {
