@@ -291,6 +291,35 @@ header {
 /* Modal Styles */
 .modal-content.sp-container {
   padding: 0;
+  background-color: var(--sp-container) !important;
+}
+
+/* Override Bootstrap's default modal styles */
+[data-bs-theme="dark"] .modal-content,
+.modal[data-bs-theme="dark"] .modal-content {
+  background-color: var(--sp-container) !important;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--sp-primary);
+}
+
+[data-bs-theme="dark"] .modal-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .modal-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
 }
 
 .modal-header {
