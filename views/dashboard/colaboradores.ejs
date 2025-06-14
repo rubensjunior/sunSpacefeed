@@ -126,7 +126,7 @@
         <button id="btn1" class="btn btn-primary" data-bs-target="#criar_modal_colaborador" dmx-on:click="run({condition:{outputType:'boolean',if:`colaboradores_ativos.items==plano_empresa.data.query_plano.limite_colaboradores_por_polo`,then:{steps:{run:{outputType:'text',action:`alertas.warning(\'Você já atingiu o número máximo de colaboradores ativos no seu plano. Para adicionar outro, desative um colaborador ou fale com o nosso suporte.\')`}}},else:{steps:{run:{outputType:'text',action:`criar_modal_colaborador.show()`}}}}})">Adicionar</button>
     </div>
 </div>
-<div class="d-flex sp-container mb-4">
+<div class="d-flex sp-container mb-4 pt-3">
     <table class="table table-dark mb-0 align-middle" style="--bs-table-bg: transparent;">
         <thead>
             <tr>
@@ -139,11 +139,11 @@
         </thead>
         <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listagem_usuarios.data.query_colaboradores" id="tableRepeat2">
             <tr style="color: #9a9cae">
-                <td class="py-3" dmx-on:click="run({condition:{outputType:'boolean',if:`status_usuario==\'Ativo\'`,then:{steps:{run:{outputType:'text',action:`data_detail_colaborador.select(id_usuario);editar_modal_colaborador.show()`}}},else:{steps:{run:{outputType:'text',action:`alertas.warning(\'Para reativar um colaborador é preciso abrir um suporte!\')`}}}}})"><i class="far fa-edit me-3 text-link-primary"></i><span dmx-text="nome_completo" class="text-link-primary fs-7"></span></td>
-                <td dmx-text="nome_tratamento" class="py-3 fs-7"></td>
-                <td dmx-text="email" class="py-3 fs-7"></td>
-                <td dmx-text="cargo_usuario_empresa" class="py-3 fs-7"></td>
-                <td dmx-text="status_usuario" class="py-3 fs-7"></td>
+                <td class="py-4" dmx-on:click="run({condition:{outputType:'boolean',if:`status_usuario==\'Ativo\'`,then:{steps:{run:{outputType:'text',action:`data_detail_colaborador.select(id_usuario);editar_modal_colaborador.show()`}}},else:{steps:{run:{outputType:'text',action:`alertas.warning(\'Para reativar um colaborador é preciso abrir um suporte!\')`}}}}})"><i class="far fa-edit me-3 text-link-primary"></i><span dmx-text="nome_completo" class="text-link-primary fs-7"></span></td>
+                <td dmx-text="nome_tratamento" class="py-4 fs-7"></td>
+                <td dmx-text="email" class="py-4 fs-7"></td>
+                <td dmx-text="cargo_usuario_empresa" class="py-4 fs-7"></td>
+                <td dmx-text="status_usuario" class="py-4 fs-7"></td>
             </tr>
         </tbody>
     </table>

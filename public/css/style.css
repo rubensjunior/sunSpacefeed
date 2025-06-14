@@ -36,19 +36,16 @@ header {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   font-size: 0.95rem;
-  font-weight: 500;
 }
 
 .menu-header .nav-link:hover {
   color: #fff;
   background-color: var(--sp-nav);
-  font-weight: 500;
 }
 
 .menu-header .nav-link.active {
   color: #fff;
   background-color: var(--sp-nav);
-  font-weight: 500;
 }
 
 /* Steps Container Styles */
@@ -378,7 +375,7 @@ header {
 }
 
 .text-link-primary {
-  color: #D6DA34;
+  color: #FFC700;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
@@ -388,7 +385,7 @@ header {
 .text-link-primary:focus {
   text-decoration: underline;
   outline: none;
-  color: #c4c730;
+  color: #FFC700;;
 }
 
 .offcanvas .nav-link:hover,

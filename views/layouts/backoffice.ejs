@@ -43,7 +43,7 @@
 
   <dmx-serverconnect id="plano_empresa" url="/api/negocios/controles/plano-empresa-atual"></dmx-serverconnect>
   <header>
-    <div class="container py-3">
+    <div class="container py-4">
       <div class="row g-3 align-items-center">
         <div class="col-6 col-md-auto d-flex align-items-center order-1">
           <a href="/security/backoffice/" class="d-flex align-items-center" internal="true">
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col-12 col-md-auto order-3 order-md-2">
-          <div class="input-group input-group-lg" style="min-width: 280px;">
+          <div class="input-group" style="min-width: 280px;">
             <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa" id="empresas" name="empresas">
               <option value="">Selecione uma empresa</option>
             </select>
@@ -95,7 +95,7 @@
 
   <!-- Second Header -->
   <div class="menu-header">
-    <div class="container py-4">
+    <div class="container py-3">
       <div class="row align-items-center justify-content-between">
         <div class="col-auto d-md-none">
           <button class="btn btn-dark border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
@@ -103,15 +103,13 @@
           </button>
         </div>
         <div class="col d-none d-md-block">
-          <nav class="nav gap-2 flex-wrap">
+          <nav class="nav gap-3 flex-wrap">
             <a class="nav-link" href="/security/backoffice/colaboradores" internal="true">Colaboradores</a>
             <a class="nav-link" href="/security/backoffice/unidades-polos" internal="true">Unidades/Polos</a>
             <a class="nav-link" href="/security/backoffice/postagens" internal="true">Postagens</a>
             <a class="nav-link" href="/security/backoffice/notificacoes-push" internal="true">Notificações Push</a>
             <a class="nav-link" href="/security/backoffice/suporte-aluno" internal="true">Suporte ao aluno</a>
           </nav>
-        </div>
-        <div class="col-auto ms-auto">
         </div>
       </div>
     </div>
