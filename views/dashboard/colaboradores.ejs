@@ -2,6 +2,7 @@
 <dmx-preloader id="carregamento" spinner="cubeGrid" bgcolor="#0c0c0c" color="#3699FF" size="56"></dmx-preloader>
 <dmx-data-detail id="data_detail_colaborador" dmx-bind:data="listagem_usuarios.data.query_colaboradores" key="id_usuario"></dmx-data-detail>
 <dmx-serverconnect id="listagem_usuarios" url="/api/negocios/colaboradores/listar_colaboradores"></dmx-serverconnect>
+<dmx-data-view id="colaboradores_ativos" dmx-bind:data="listagem_usuarios.data.query_colaboradores" filter="status_usuario == 'Ativo'"></dmx-data-view>
 <meta name="ac:route" content="/security/backoffice/colaboradores">
 <div class="modal" id="criar_modal_colaborador" is="dmx-bs5-modal" tabindex="-1" data-bs-theme="dark" nocloseonclick="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -105,8 +106,8 @@
                             </div>
                         </div>
                     </div>
-                    <input class="form-control" id="edit_id_usuario_atual" name="edit_id_usuario_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_detail_colaborador.data.id_usuario">
-                    <input class="form-control" id="edit_id_empresa_atual" name="edit_id_empresa_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.ref_id_empresa_ativa">
+                    <input class="form-control" id="edit_id_usuario_atual" name="edit_id_usuario_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_detail_colaborador.data.id_usuario" type="hidden">
+                    <input class="form-control" id="edit_id_empresa_atual" name="edit_id_empresa_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.ref_id_empresa_ativa" type="hidden">
                     <div class="form-group mb-3"> <button id="btn2" class="btn btn-primary" type="submit">Atualizar</button>
                     </div>
 
@@ -119,10 +120,10 @@
 <div class="d-flex flex-row align-items-center justify-content-between mb-4">
     <div class="d-flex flex-column justify-content-start align-items-start">
         <h5 class="m-0 fw-bolder">Colaboradores</h5>
-        <p class="sub-titulo mt-1 mb-0">Gestão de contas e acessos (Colaboradores do plano atual: {{plano_empresa.data.query_plano.limite_colaboradores_por_polo}}. Disponíveis: {{(plano_empresa.data.query_plano.limite_colaboradores_por_polo.toNumber() - listagem_usuarios.data.query_colaboradores.length.toNumber())}})</p>
+        <p class="sub-titulo mt-1 mb-0">Gestão de contas e acessos (Colaboradores do plano atual: {{plano_empresa.data.query_plano.limite_colaboradores_por_polo}}. Disponíveis: {{(plano_empresa.data.query_plano.limite_colaboradores_por_polo.toNumber() - colaboradores_ativos.data.length.toNumber())}})</p>
     </div>
     <div class="d-flex align-items-center">
-        <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criar_modal_colaborador">Adicionar</button>
+        <button id="btn1" class="btn btn-primary" data-bs-target="#criar_modal_colaborador" dmx-on:click="run({condition:{outputType:'boolean',if:`colaboradores_ativos.items==plano_empresa.data.query_plano.limite_colaboradores_por_polo`,then:{steps:{run:{outputType:'text',action:`alertas.warning(\'Você já atingiu o número máximo de colaboradores ativos no seu plano. Para adicionar outro, desative um colaborador ou fale com o nosso suporte.\')`}}},else:{steps:{run:{outputType:'text',action:`criar_modal_colaborador.show()`}}}}})">Adicionar</button>
     </div>
 </div>
 <div class="d-flex sp-container mb-4">
@@ -138,7 +139,7 @@
         </thead>
         <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listagem_usuarios.data.query_colaboradores" id="tableRepeat2">
             <tr style="color: #9a9cae">
-                <td class="py-3" dmx-on:click="data_detail_colaborador.select(id_usuario);editar_modal_colaborador.show()"><i class="far fa-edit me-3 text-link-primary"></i><span dmx-text="nome_completo" class="text-link-primary fs-7"></span></td>
+                <td class="py-3" dmx-on:click="run({condition:{outputType:'boolean',if:`status_usuario==\'Ativo\'`,then:{steps:{run:{outputType:'text',action:`data_detail_colaborador.select(id_usuario);editar_modal_colaborador.show()`}}},else:{steps:{run:{outputType:'text',action:`alertas.warning(\'Para reativar um colaborador é preciso abrir um suporte!\')`}}}}})"><i class="far fa-edit me-3 text-link-primary"></i><span dmx-text="nome_completo" class="text-link-primary fs-7"></span></td>
                 <td dmx-text="nome_tratamento" class="py-3 fs-7"></td>
                 <td dmx-text="email" class="py-3 fs-7"></td>
                 <td dmx-text="cargo_usuario_empresa" class="py-3 fs-7"></td>
