@@ -367,9 +367,13 @@ header {
   font-size: 1rem;
 }
 .titulo-tabela{
-  font-size: 13px;
+  font-size: 13px !important;
   color: #9a9cae !important;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
+}
+.text-link-primary{
+  color: #D6DA34 !important;
+  font-weight: 500;
 }
 
 .offcanvas .nav-link:hover,

@@ -101,6 +101,14 @@
               {
                 "table": "usuarios",
                 "column": "*"
+              },
+              {
+                "table": "dados_colab",
+                "column": "cargo_usuario_empresa"
+              },
+              {
+                "table": "dados_colab",
+                "column": "status_usuario"
               }
             ],
             "params": [
@@ -116,7 +124,40 @@
               "name": "usuarios"
             },
             "primary": "id_usuario",
-            "joins": [],
+            "joins": [
+              {
+                "table": "usuarios_empresas",
+                "column": "*",
+                "alias": "dados_colab",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "dados_colab",
+                      "column": "ref_id_usuario",
+                      "operator": "equal",
+                      "operation": "=",
+                      "value": {
+                        "table": "usuarios",
+                        "column": "id_usuario"
+                      }
+                    },
+                    {
+                      "table": "dados_colab",
+                      "column": "ref_id_empresa",
+                      "operator": "equal",
+                      "operation": "=",
+                      "value": {
+                        "table": "usuarios",
+                        "column": "ref_id_empresa_ativa"
+                      }
+                    }
+                  ]
+                },
+                "primary": "id_usuario_empresa"
+              }
+            ],
             "wheres": {
               "condition": "AND",
               "rules": [
@@ -149,12 +190,13 @@
               "conditional": null,
               "valid": true
             },
-            "query": "select * from \"usuarios\" where \"usuarios\".\"ref_id_empresa_ativa\" = ? order by \"nome_completo\" ASC",
+            "query": "select \"usuarios\".*, \"dados_colab\".\"cargo_usuario_empresa\", \"dados_colab\".\"status_usuario\" from \"usuarios\" inner join \"usuarios_empresas\" as \"dados_colab\" on \"dados_colab\".\"ref_id_usuario\" = \"usuarios\".\"id_usuario\" and \"dados_colab\".\"ref_id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"ref_id_empresa_ativa\" = ? order by \"usuarios\".\"nome_completo\" ASC",
             "orders": [
               {
                 "table": "usuarios",
                 "column": "nome_completo",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 1
               }
             ]
           }
@@ -200,6 +242,14 @@
           {
             "type": "text",
             "name": "nome_tratamento"
+          },
+          {
+            "type": "text",
+            "name": "cargo_usuario_empresa"
+          },
+          {
+            "type": "text",
+            "name": "status_usuario"
           }
         ],
         "outputType": "array"

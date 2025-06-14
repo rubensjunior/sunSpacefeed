@@ -427,7 +427,7 @@
                         "table": "usuarios",
                         "column": "tipo_usuario",
                         "type": "text",
-                        "value": "{{$_POST.funcao_usuario}}"
+                        "value": "{{'Colaborador'}}"
                       },
                       {
                         "table": "usuarios",
@@ -438,7 +438,7 @@
                     ],
                     "table": "usuarios",
                     "returning": "id_usuario",
-                    "query": "insert into \"usuarios\" (\"email\", \"nome_completo\", \"nome_tratamento\", \"ref_id_empresa_ativa\", \"tipo_usuario\") values (?, ?, ?, ?, ?)",
+                    "query": "insert into \"usuarios\" (\"email\", \"nome_completo\", \"nome_tratamento\", \"ref_id_empresa_ativa\", \"tipo_usuario\") values (?, ?, ?, ?, ?) returning \"id_usuario\"",
                     "params": [
                       {
                         "name": ":P1",
@@ -461,7 +461,7 @@
                       {
                         "name": ":P4",
                         "type": "expression",
-                        "value": "{{$_POST.funcao_usuario}}",
+                        "value": "{{'Colaborador'}}",
                         "test": ""
                       },
                       {
