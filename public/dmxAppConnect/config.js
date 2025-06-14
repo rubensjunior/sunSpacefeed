@@ -119,5 +119,60 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "colaboradores": {
+    "data_detail_colaborador": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_usuario"
+        },
+        {
+          "type": "datetime",
+          "name": "created_at_usuario"
+        },
+        {
+          "type": "text",
+          "name": "nome_completo"
+        },
+        {
+          "type": "text",
+          "name": "email"
+        },
+        {
+          "type": "text",
+          "name": "token_celular"
+        },
+        {
+          "type": "text",
+          "name": "firebase_auth_id"
+        },
+        {
+          "type": "number",
+          "name": "ref_id_empresa_ativa"
+        },
+        {
+          "type": "text",
+          "name": "senha"
+        },
+        {
+          "type": "text",
+          "name": "tipo_usuario"
+        },
+        {
+          "type": "text",
+          "name": "nome_tratamento"
+        },
+        {
+          "type": "text",
+          "name": "cargo_usuario_empresa"
+        },
+        {
+          "type": "text",
+          "name": "status_usuario"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

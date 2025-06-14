@@ -1,4 +1,5 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="selecionarempresa" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="selecionarempresa" appConnect="local" components="{dmxPreloader:{}}" -->
+<dmx-preloader id="preloader1" color="#3699FF" bgcolor="#0c0c0c" spinner="cubeGrid" size="56"></dmx-preloader>
 <dmx-serverconnect id="selecaoempresa" noload="true" url="/api/negocios/selecionar-empresa"></dmx-serverconnect>
 <dmx-serverconnect id="listagemempresa" url="/api/negocios/listar-empresa"></dmx-serverconnect>
 <div class="container text-center py-5">

@@ -374,6 +374,7 @@ header {
 .text-link-primary{
   color: #D6DA34 !important;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .offcanvas .nav-link:hover,
