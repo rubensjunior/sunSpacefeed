@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity_usuario_logado",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "meta": []
+      },
+      {
+        "name": "query_empresa_atual",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identity_usuario_logado}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity_usuario_logado}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"ref_id_empresa_ativa\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?"
+          }
+        },
+        "meta": [
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "query_colaboradores",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "*"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{query_empresa_atual.ref_id_empresa_ativa}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.ref_id_empresa_ativa",
+                  "field": "usuarios.ref_id_empresa_ativa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{query_empresa_atual.ref_id_empresa_ativa}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "ref_id_empresa_ativa",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "references": "id_empresa",
+                      "inTable": "empresas",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "SET NULL",
+                      "name": "ref_id_empresa_ativa"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select * from \"usuarios\" where \"usuarios\".\"ref_id_empresa_ativa\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          },
+          {
+            "type": "datetime",
+            "name": "created_at_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_completo"
+          },
+          {
+            "type": "text",
+            "name": "email"
+          },
+          {
+            "type": "text",
+            "name": "token_celular"
+          },
+          {
+            "type": "text",
+            "name": "firebase_auth_id"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          },
+          {
+            "type": "text",
+            "name": "senha"
+          },
+          {
+            "type": "text",
+            "name": "tipo_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_tratamento"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}
