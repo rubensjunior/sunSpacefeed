@@ -12,16 +12,22 @@
 body {
   background-color: var(--sp-background);
   color: #fff;
-  min-height: 100vh;
+  min-height: 100dvh; /* Usando dvh para melhor suporte mobile */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
 }
 
 header {
-  background-color: var(--sp-background) !important;
+  background-color: var(--sp-background);
+  z-index: 1000;
+  position: relative;
 }
-.sub-titulo{
-  font-size: 14px;
+
+.sub-titulo {
+  font-size: 0.875rem;
   color: #9a9cae;
 }
+
 /* Menu Header Nav Links */
 .menu-header .nav-link {
   color: #9a9cae;
@@ -30,16 +36,19 @@ header {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .menu-header .nav-link:hover {
   color: #fff;
   background-color: var(--sp-nav);
+  font-weight: 500;
 }
 
 .menu-header .nav-link.active {
   color: #fff;
   background-color: var(--sp-nav);
+  font-weight: 500;
 }
 
 /* Steps Container Styles */
@@ -125,16 +134,18 @@ header {
 
 /* Font Sizes */
 .fs-7 {
-  font-size: 0.875rem !important;
+  font-size: 0.875rem;
 }
 
 .fs-8 {
-  font-size: 0.75rem !important;
+  font-size: 0.75rem;
 }
 
 /* Menu Header Styles */
 .menu-header {
-  background-color: var(--sp-navbar) !important;
+  background-color: var(--sp-navbar);
+  position: relative;
+  z-index: 100;
 }
 
 .menu-header .form-select {
@@ -225,14 +236,6 @@ header {
   opacity: 1;
 }
 
-.form-control:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.form-control::-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
 /* Form Select Custom Styles */
 .form-select {
   background-color: rgba(255, 255, 255, 0.05);
@@ -291,13 +294,13 @@ header {
 /* Modal Styles */
 .modal-content.sp-container {
   padding: 0;
-  background-color: var(--sp-container) !important;
+  background-color: var(--sp-container);
 }
 
 /* Override Bootstrap's default modal styles */
 [data-bs-theme="dark"] .modal-content,
 .modal[data-bs-theme="dark"] .modal-content {
-  background-color: var(--sp-container) !important;
+  background-color: var(--sp-container);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -366,15 +369,26 @@ header {
   transition: all 0.2s ease-in-out;
   font-size: 1rem;
 }
-.titulo-tabela{
-  font-size: 13px !important;
-  color: #9a9cae !important;
-  text-transform: uppercase !important;
+
+.titulo-tabela {
+  font-size: 0.8125rem;
+  color: #9a9cae;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-.text-link-primary{
-  color: #D6DA34 !important;
+
+.text-link-primary {
+  color: #D6DA34;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.text-link-primary:hover,
+.text-link-primary:focus {
+  text-decoration: underline;
+  outline: none;
+  color: #c4c730;
 }
 
 .offcanvas .nav-link:hover,
@@ -411,5 +425,27 @@ header {
 
   .dropdown-menu {
     min-width: 280px;
+  }
+}
+
+/* Adicionando suporte a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Adicionando suporte a modo de alto contraste */
+@media (forced-colors: active) {
+  .btn-profile,
+  .form-control,
+  .form-select {
+    border: 1px solid currentColor;
   }
 }

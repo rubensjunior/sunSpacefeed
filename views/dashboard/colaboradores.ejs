@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaboradores" appConnect="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{},dmxPreloader:{},dmxAnimateCSS:{}}" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaboradores" appConnect="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{},dmxPreloader:{},dmxAnimateCSS:{},dmxFormatter:{}}" -->
 <dmx-preloader id="carregamento" spinner="cubeGrid" bgcolor="#0c0c0c" color="#3699FF" size="56"></dmx-preloader>
 <dmx-data-detail id="data_detail_colaborador" dmx-bind:data="listagem_usuarios.data.query_colaboradores" key="id_usuario"></dmx-data-detail>
 <dmx-serverconnect id="listagem_usuarios" url="/api/negocios/colaboradores/listar_colaboradores"></dmx-serverconnect>
@@ -11,7 +11,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criar_usuario.reset()"></button>
             </div>
             <div class="modal-body text-white">
-                <form id="criar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/criar-colaborador" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="listagem_usuarios.load({});criar_modal_colaborador.hide();criar_usuario.reset()">
+                <form id="criar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/criar-colaborador" dmx-on:success="listagem_usuarios.load({});criar_modal_colaborador.hide();criar_usuario.reset()">
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="nome_completo" class="form-label">Nome completo</label>
@@ -29,7 +29,10 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="email_usuario" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email_usuario" name="email_usuario" aria-describedby="input2_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido.">
+                                <input type="email" class="form-control" id="email_usuario" name="email_usuario" aria-describedby="input2_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido." dmx-class:is-invalid="criar_usuario.lastError.response.form.email">
+                                <div class="invalid-feedback" dmx-show="criar_usuario.lastError.response.form.email">
+                                    {{criar_usuario.lastError.response.form.email}}
+                                </div>
                             </div>
                         </div>
                         <div class="col">
@@ -61,16 +64,16 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criar_usuario.reset()"></button>
             </div>
             <div class="modal-body text-white">
-                <form id="editar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/criar-colaborador" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="listagem_usuarios.load({});criar_modal_colaborador.hide();criar_usuario.reset()">
+                <form id="editar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/atualizar-colaborador" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="listagem_usuarios.load({});editar_modal_colaborador.hide();editar_usuario.reset()">
                     <div class="row">
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="nome_completo1" class="form-label">Nome completo</label>
-                                <input type="text" class="form-control" id="nome_completo1" name="nome_completo" aria-describedby="input2_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.nome_completo">
+                            <div class="form-group mb-3"> <label for="edit_nome_completo" class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" id="edit_nome_completo" name="edit_nome_completo" aria-describedby="input2_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.nome_completo">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="nome_tratamento1" class="form-label">Nome de tratamento</label>
-                                <input type="text" class="form-control" id="nome_tratamento1" name="nome_tratamento" aria-describedby="input2_help1" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.nome_tratamento">
+                            <div class="form-group mb-3"> <label for="edit_nome_tratamento" class="form-label">Nome de tratamento</label>
+                                <input type="text" class="form-control" id="edit_nome_tratamento" name="edit_nome_tratamento" aria-describedby="input2_help1" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.nome_tratamento">
                             </div>
                         </div>
                     </div>
@@ -78,13 +81,13 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="email_usuario1" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email_usuario1" name="email_usuario" aria-describedby="input2_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido." dmx-bind:value="data_detail_colaborador.data.email">
+                            <div class="form-group mb-3"> <label for="edit_email_usuario" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="edit_email_usuario" name="edit_email_usuario" aria-describedby="input2_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido." dmx-bind:value="data_detail_colaborador.data.email">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group mb-3"> <label for="input5" class="form-label">Função</label>
-                                <select id="funcao_usuario1" class="form-select" name="funcao_usuario" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.cargo_usuario_empresa">
+                                <select id="edit_funcao_usuario" class="form-select" name="edit_funcao_usuario" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.cargo_usuario_empresa">
                                     <option value="">Selecione uma opção</option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Editor">Editor</option>
@@ -94,7 +97,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group mb-3"> <label for="input5" class="form-label">Status</label>
-                                <select id="status_usuario" class="form-select" name="status_usuario" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.status_usuario">
+                                <select id="edit_status_usuario" class="form-select" name="edit_status_usuario" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_detail_colaborador.data.status_usuario">
                                     <option value="">Selecione uma opção</option>
                                     <option value="Ativo">Ativo</option>
                                     <option value="Inativo">Inativo</option>
@@ -102,7 +105,8 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" class="form-control" id="id_empresa_atual1" name="id_empresa_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.ref_id_empresa_ativa">
+                    <input class="form-control" id="edit_id_usuario_atual" name="edit_id_usuario_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_detail_colaborador.data.id_usuario">
+                    <input class="form-control" id="edit_id_empresa_atual" name="edit_id_empresa_atual" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.ref_id_empresa_ativa">
                     <div class="form-group mb-3"> <button id="btn2" class="btn btn-primary" type="submit">Atualizar</button>
                     </div>
 
@@ -115,7 +119,7 @@
 <div class="d-flex flex-row align-items-center justify-content-between mb-4">
     <div class="d-flex flex-column justify-content-start align-items-start">
         <h5 class="m-0 fw-bolder">Colaboradores</h5>
-        <p class="sub-titulo mt-1 mb-0">Gestão de contas e acessos</p>
+        <p class="sub-titulo mt-1 mb-0">Gestão de contas e acessos (Colaboradores do plano atual: {{plano_empresa.data.query_plano.limite_colaboradores_por_polo}}. Disponíveis: {{(plano_empresa.data.query_plano.limite_colaboradores_por_polo.toNumber() - listagem_usuarios.data.query_colaboradores.length.toNumber())}})</p>
     </div>
     <div class="d-flex align-items-center">
         <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criar_modal_colaborador">Adicionar</button>
@@ -125,11 +129,11 @@
     <table class="table table-dark mb-0 align-middle" style="--bs-table-bg: transparent;">
         <thead>
             <tr>
-                <th class="py-3 titulo-tabela" style="color: #9a9cae">Nome completo</th>
-                <th class="py-3 titulo-tabela" style="color: #9a9cae">Nome tratamento</th>
-                <th class="py-3 titulo-tabela" style="color: #9a9cae">E-mail</th>
-                <th class="py-3 titulo-tabela" style="color: #9a9cae">Função</th>
-                <th class="py-3 titulo-tabela" style="color: #9a9cae">Status</th>
+                <th class="pb-3 titulo-tabela" style="color: #9a9cae">Nome completo</th>
+                <th class="pb-3 titulo-tabela" style="color: #9a9cae">Nome tratamento</th>
+                <th class="pb-3 titulo-tabela" style="color: #9a9cae">E-mail</th>
+                <th class="pb-3 titulo-tabela" style="color: #9a9cae">Função</th>
+                <th class="pb-3 titulo-tabela" style="color: #9a9cae">Status</th>
             </tr>
         </thead>
         <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listagem_usuarios.data.query_colaboradores" id="tableRepeat2">

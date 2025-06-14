@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/colaboradores.ejs",
+      "linkedForm": "editar_usuario"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "edit_nome_completo",
+        "options": {
+          "rules": {}
+        },
+        "name": "edit_nome_completo"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_nome_tratamento",
+        "options": {
+          "rules": {}
+        },
+        "name": "edit_nome_tratamento"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_email_usuario",
+        "options": {
+          "rules": {}
+        },
+        "name": "edit_email_usuario"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_id_usuario_atual",
+        "name": "edit_id_usuario_atual"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_id_empresa_atual",
+        "name": "edit_id_empresa_atual"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_funcao_usuario",
+        "options": {
+          "rules": {}
+        },
+        "name": "edit_funcao_usuario"
+      },
+      {
+        "type": "text",
+        "fieldName": "edit_status_usuario",
+        "options": {
+          "rules": {}
+        },
+        "name": "edit_status_usuario"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "update_usuario",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "type": "text",
+                "value": "{{$_POST.edit_nome_completo}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_tratamento",
+                "type": "text",
+                "value": "{{$_POST.edit_nome_tratamento}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "email",
+                "type": "text",
+                "value": "{{$_POST.edit_email_usuario}}"
+              }
+            ],
+            "table": "usuarios",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id_usuario",
+                  "field": "id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.edit_id_usuario_atual}}",
+                  "data": {
+                    "column": "id_usuario"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_usuario",
+            "query": "update \"usuarios\" set \"nome_completo\" = ?, \"nome_tratamento\" = ?, \"email\" = ? where \"id_usuario\" = ? returning \"id_usuario\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.edit_nome_completo}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.edit_nome_tratamento}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.edit_email_usuario}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P4",
+                "value": "{{$_POST.edit_id_usuario_atual}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "update_usuario_empresa",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "cargo_usuario_empresa",
+                "type": "text",
+                "value": "{{$_POST.edit_funcao_usuario}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "{{$_POST.edit_status_usuario}}"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "ref_id_usuario",
+                  "field": "ref_id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.edit_id_usuario_atual}}",
+                  "data": {
+                    "column": "ref_id_usuario"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "ref_id_empresa",
+                  "field": "ref_id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.edit_id_empresa_atual}}",
+                  "data": {
+                    "column": "ref_id_empresa"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_usuario_empresa",
+            "query": "update \"usuarios_empresas\" set \"cargo_usuario_empresa\" = ?, \"status_usuario\" = ? where \"ref_id_usuario\" = ? and \"ref_id_empresa\" = ?",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.edit_funcao_usuario}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.edit_status_usuario}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P3",
+                "value": "{{$_POST.edit_id_usuario_atual}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P4",
+                "value": "{{$_POST.edit_id_empresa_atual}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}

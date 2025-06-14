@@ -1,0 +1,230 @@
+[
+  {
+    "name": "identity_usuario_logado",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "security"
+    },
+    "meta": []
+  },
+  {
+    "name": "query_usuario_atual",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postrgress",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "usuarios",
+            "column": "ref_id_empresa_ativa"
+          },
+          {
+            "table": "empresas",
+            "column": "empresa_matriz"
+          }
+        ],
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{identity_usuario_logado}}",
+            "test": ""
+          }
+        ],
+        "table": {
+          "name": "usuarios"
+        },
+        "primary": "id_usuario",
+        "joins": [
+          {
+            "table": "empresas",
+            "column": "*",
+            "type": "INNER",
+            "clauses": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "table": "empresas",
+                  "column": "id_empresa",
+                  "operation": "=",
+                  "operator": "equal",
+                  "value": {
+                    "table": "usuarios",
+                    "column": "ref_id_empresa_ativa",
+                    "type": "text"
+                  }
+                }
+              ]
+            },
+            "primary": "id_empresa"
+          }
+        ],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "usuarios.id_usuario",
+              "field": "usuarios.id_usuario",
+              "type": "string",
+              "operator": "equal",
+              "value": "{{identity_usuario_logado}}",
+              "data": {
+                "table": "usuarios",
+                "column": "id_usuario",
+                "type": "text",
+                "columnObj": {
+                  "type": "uuid",
+                  "default": "gen_random_uuid()",
+                  "primary": true,
+                  "unique": true,
+                  "nullable": false,
+                  "name": "id_usuario"
+                }
+              },
+              "operation": "=",
+              "table": "usuarios"
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "select \"usuarios\".\"ref_id_empresa_ativa\", \"empresas\".\"empresa_matriz\" from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
+      }
+    },
+    "meta": [
+      {
+        "type": "number",
+        "name": "ref_id_empresa_ativa"
+      },
+      {
+        "type": "number",
+        "name": "empresa_matriz"
+      }
+    ],
+    "outputType": "object",
+    "collapsed": true
+  },
+  {
+    "name": "query_plano",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postrgress",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "planos_contratados",
+            "column": "id"
+          },
+          {
+            "table": "planos_contratados",
+            "column": "ref_id_plano"
+          },
+          {
+            "table": "planos_contratados",
+            "column": "ref_id_empresa"
+          },
+          {
+            "table": "planos_contratados",
+            "column": "ref_id_usuario_admin"
+          },
+          {
+            "table": "planos_contratados",
+            "column": "polos_adicionais"
+          },
+          {
+            "table": "planos_contratados",
+            "column": "valor_total"
+          },
+          {
+            "table": "planos_disponiveis",
+            "column": "limite_colaboradores_por_polo"
+          },
+          {
+            "table": "planos_disponiveis",
+            "column": "limite_alunos_por_polo"
+          },
+          {
+            "table": "planos_disponiveis",
+            "column": "nome"
+          }
+        ],
+        "params": [],
+        "table": {
+          "name": "planos_contratados"
+        },
+        "primary": "id",
+        "joins": [
+          {
+            "table": "planos_disponiveis",
+            "column": "*",
+            "type": "INNER",
+            "clauses": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "table": "planos_disponiveis",
+                  "column": "id_plano",
+                  "operation": "=",
+                  "operator": "equal",
+                  "value": {
+                    "table": "planos_contratados",
+                    "column": "ref_id_plano",
+                    "type": "text"
+                  }
+                }
+              ]
+            },
+            "primary": "id_plano"
+          }
+        ],
+        "query": "select \"planos_contratados\".\"id\", \"planos_contratados\".\"ref_id_plano\", \"planos_contratados\".\"ref_id_empresa\", \"planos_contratados\".\"ref_id_usuario_admin\", \"planos_contratados\".\"polos_adicionais\", \"planos_contratados\".\"valor_total\", \"planos_disponiveis\".\"limite_colaboradores_por_polo\", \"planos_disponiveis\".\"limite_alunos_por_polo\", \"planos_disponiveis\".\"nome\" from \"planos_contratados\" inner join \"planos_disponiveis\" on \"planos_disponiveis\".\"id_plano\" = \"planos_contratados\".\"ref_id_plano\""
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "text",
+        "name": "id"
+      },
+      {
+        "type": "number",
+        "name": "ref_id_plano"
+      },
+      {
+        "type": "number",
+        "name": "ref_id_empresa"
+      },
+      {
+        "type": "number",
+        "name": "ref_id_usuario_admin"
+      },
+      {
+        "type": "number",
+        "name": "polos_adicionais"
+      },
+      {
+        "type": "number",
+        "name": "valor_total"
+      },
+      {
+        "type": "number",
+        "name": "limite_colaboradores_por_polo"
+      },
+      {
+        "type": "number",
+        "name": "limite_alunos_por_polo"
+      },
+      {
+        "type": "text",
+        "name": "nome"
+      }
+    ],
+    "outputType": "object"
+  }
+]

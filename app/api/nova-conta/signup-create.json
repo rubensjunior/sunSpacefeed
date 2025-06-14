@@ -393,6 +393,67 @@
         ]
       },
       {
+        "name": "update",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "empresas",
+                "column": "empresa_matriz",
+                "type": "text",
+                "value": "{{insert_empresa.identity}}"
+              }
+            ],
+            "table": "empresas",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id_empresa",
+                  "field": "id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{insert_empresa.identity}}",
+                  "data": {
+                    "column": "id_empresa"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_empresa",
+            "query": "update \"empresas\" set \"empresa_matriz\" = ? where \"id_empresa\" = ?",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{insert_empresa.identity}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{insert_empresa.identity}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
         "name": "insert_usuario",
         "module": "dbupdater",
         "action": "insert",
