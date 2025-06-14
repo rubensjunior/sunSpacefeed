@@ -10,10 +10,8 @@
       "user": "postgres.qwxqwcyrgwogyyjengbo",
       "password": "@Bakihamma025@",
       "database": "postgres"
-    },
-    "meta": {}
+    }
   },
   "serverType": "node",
-  "fileName": "postrgress.json",
-  "actionFilePath": "file:///C:/Users/Rubens%20Bentes/Documents/Projetos/sunSpacefeed/app/modules/connections/postrgress.json"
+  "fileName": "postrgress.json"
 }

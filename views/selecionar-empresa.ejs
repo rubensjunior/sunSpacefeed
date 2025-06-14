@@ -7,7 +7,7 @@
             <img src="/assets/images/spacefeed-white.png" width="200" class="mb-4 mx-auto">
             <h4 class="text-center mb-5">Bem-vindo(a) {{listagemempresa.data.query_usuario.nome_tratamento}}. Escolha sua empresa.</h4>
             <div class="row align-items-center justify-content-center" is="dmx-repeat" id="repeatempresas" dmx-bind:repeat="listagemempresa.data.query_empresas" key="id_empresa">
-                <div class="col-3">
+                <div class="col-11 col-md-5 col-lg-3 col-xxl-3">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title text-center mb-3">{{nome_polo}}</h4>

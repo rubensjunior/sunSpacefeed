@@ -20,8 +20,8 @@
         "options": {
           "provider": "security"
         },
-        "output": true,
-        "meta": []
+        "meta": [],
+        "output": true
       },
       {
         "name": "dados_usuario",
@@ -51,6 +51,10 @@
               {
                 "table": "usuarios",
                 "column": "tipo_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
               },
               {
                 "table": "empresas",
@@ -122,7 +126,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"email\", \"usuarios\".\"nome_tratamento\", \"usuarios\".\"tipo_usuario\", \"empresas\".* from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"email\", \"usuarios\".\"nome_tratamento\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"empresas\".* from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
           }
         },
         "output": true,
@@ -146,6 +150,10 @@
           {
             "type": "text",
             "name": "tipo_usuario"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
           },
           {
             "type": "text",

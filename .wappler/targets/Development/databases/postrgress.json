@@ -23,110 +23,10 @@
       "extensions"
     ],
     "tables": {
-      "planos_contratados": {
-        "db": {},
-        "columns": {
-          "id": {
-            "db": {
-              "type": "uuid",
-              "default": "gen_random_uuid()",
-              "primary": true,
-              "unique": true,
-              "nullable": false
-            }
-          },
-          "ref_id_plano": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_plano",
-              "inTable": "planos_disponiveis",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "RESTRICT"
-            }
-          },
-          "ref_id_empresa": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_empresa",
-              "inTable": "empresas",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "CASCADE"
-            }
-          },
-          "ref_id_usuario_admin": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_usuario",
-              "inTable": "usuarios",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "SET NULL"
-            }
-          },
-          "polos_adicionais": {
-            "db": {
-              "type": "integer",
-              "default": 0,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "valor_total": {
-            "db": {
-              "type": "decimal",
-              "default": 0,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "status_plano": {
-            "db": {
-              "type": "string",
-              "default": "ativo",
-              "maxLength": 20,
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "comment": "Status do plano contratado: ativo, cancelado, suspenso ou pendente"
-            }
-          },
-          "data_contratacao": {
-            "db": {
-              "type": "timestamp",
-              "default": "now()",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "data_cancelamento": {
-            "db": {
-              "type": "timestamp",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "comment": "Data em que o plano foi cancelado, se aplicável",
-              "nullable": true
-            }
-          }
-        }
-      },
       "storage.buckets": {
-        "db": {},
+        "db": {
+          "schema": "storage"
+        },
         "refs": {
           "storage.objects": "bucket_id",
           "storage.s3_multipart_uploads": "bucket_id",
@@ -134,34 +34,51 @@
         }
       },
       "storage.migrations": {
-        "db": {}
+        "db": {
+          "schema": "storage"
+        }
       },
       "storage.objects": {
-        "db": {}
+        "db": {
+          "schema": "storage"
+        }
       },
       "storage.s3_multipart_uploads": {
-        "db": {},
+        "db": {
+          "schema": "storage"
+        },
         "sub": {
           "storage.s3_multipart_uploads_parts": "upload_id"
         }
       },
       "storage.s3_multipart_uploads_parts": {
-        "db": {},
+        "db": {
+          "schema": "storage"
+        },
         "parent": "s3_multipart_uploads"
       },
       "auth.saml_providers": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SAML Identity Provider connections."
+        }
       },
       "auth.saml_relay_states": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Contains SAML Relay State information for each Service Provider initiated login."
+        }
       },
       "auth.audit_log_entries": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Audit trail for user actions."
+        }
       },
       "auth.flow_state": {
-        "db": {},
-        "refs": {
-          "auth.saml_relay_states": "flow_state_id"
+        "db": {
+          "schema": "auth",
+          "comment": "stores metadata for pkce logins"
         },
         "columns": {
           "id": {
@@ -263,47 +180,82 @@
               "nullable": true
             }
           }
+        },
+        "refs": {
+          "auth.saml_relay_states": "flow_state_id"
         }
       },
       "auth.identities": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores identities associated to a user."
+        }
       },
       "auth.instances": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages users across multiple sites."
+        }
       },
       "auth.mfa_challenges": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores metadata about challenge requests made"
+        }
       },
       "auth.schema_migrations": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages updates to the auth system."
+        }
       },
       "auth.sessions": {
-        "db": {},
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores session data associated to a user."
+        },
         "refs": {
           "auth.refresh_tokens": "session_id",
           "auth.mfa_amr_claims": "session_id"
         }
       },
       "auth.refresh_tokens": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Store of tokens used to refresh JWT tokens once they expire."
+        }
       },
       "auth.mfa_factors": {
-        "db": {},
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores metadata about factors"
+        },
         "refs": {
           "auth.mfa_challenges": "factor_id"
         }
       },
       "auth.one_time_tokens": {
-        "db": {}
+        "db": {
+          "schema": "auth"
+        }
       },
       "auth.mfa_amr_claims": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores authenticator method reference claims for multi factor authentication"
+        }
       },
       "auth.sso_domains": {
-        "db": {}
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SSO email address domain mapping to an SSO Identity Provider."
+        }
       },
       "auth.sso_providers": {
-        "db": {},
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SSO identity provider information; see saml_providers for SAML."
+        },
         "refs": {
           "auth.saml_providers": "sso_provider_id",
           "auth.saml_relay_states": "sso_provider_id",
@@ -311,7 +263,10 @@
         }
       },
       "auth.users": {
-        "db": {},
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores user login data within a secure schema."
+        },
         "refs": {
           "auth.identities": "user_id",
           "auth.sessions": "user_id",
@@ -319,41 +274,67 @@
           "auth.one_time_tokens": "user_id"
         }
       },
+      "pgsodium.key": {
+        "db": {
+          "schema": "pgsodium",
+          "comment": "This table holds metadata for derived keys given a key_id and key_context. The raw key is never stored."
+        }
+      },
       "realtime.messages_2025_05_12": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.schema_migrations": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.messages_2025_05_14": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.messages_2025_05_13": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.messages_2025_05_15": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.messages": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.messages_2025_05_16": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.subscription": {
-        "db": {}
-      },
-      "pgsodium.key": {
-        "db": {}
+        "db": {
+          "schema": "realtime"
+        }
       },
       "vault.secrets": {
-        "db": {}
+        "db": {
+          "schema": "vault",
+          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
+        }
       },
       "comentarios_postagens": {
-        "db": {}
+        "db": {
+          "schema": "public"
+        }
       },
       "postagens": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_postagem": {
             "db": {
@@ -418,16 +399,128 @@
         }
       },
       "midias_postagens": {
-        "db": {}
+        "db": {
+          "schema": "public"
+        }
       },
       "fcm_tokens": {
-        "db": {}
+        "db": {
+          "schema": "public"
+        }
+      },
+      "planos_contratados": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "uuid",
+              "default": "gen_random_uuid()",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "ref_id_plano": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_plano",
+              "inTable": "planos_disponiveis",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "RESTRICT"
+            }
+          },
+          "ref_id_empresa": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_empresa",
+              "inTable": "empresas",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "CASCADE"
+            }
+          },
+          "ref_id_usuario_admin": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_usuario",
+              "inTable": "usuarios",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "SET NULL"
+            }
+          },
+          "polos_adicionais": {
+            "db": {
+              "type": "integer",
+              "default": 0,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "valor_total": {
+            "db": {
+              "type": "decimal",
+              "default": 0,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "status_plano": {
+            "db": {
+              "type": "string",
+              "default": "ativo",
+              "maxLength": 20,
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "comment": "Status do plano contratado: ativo, cancelado, suspenso ou pendente"
+            }
+          },
+          "data_contratacao": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "data_cancelamento": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "comment": "Data em que o plano foi cancelado, se aplicável",
+              "nullable": true
+            }
+          }
+        }
       },
       "log_planos_contratados": {
-        "db": {}
+        "db": {
+          "schema": "public"
+        }
       },
       "planos_disponiveis": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_plano": {
             "db": {
@@ -529,7 +622,9 @@
         }
       },
       "empresas": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_empresa": {
             "db": {
@@ -657,15 +752,17 @@
           }
         },
         "refs": {
-          "planos_contratados": "ref_id_empresa",
           "comentarios_postagens": "ref_id_empresa",
           "postagens": "ref_id_empresa",
+          "planos_contratados": "ref_id_empresa",
           "usuarios": "ref_id_empresa_ativa",
           "usuarios_empresas": "ref_id_empresa"
         }
       },
       "usuarios": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_usuario": {
             "db": {
@@ -759,16 +856,18 @@
           }
         },
         "refs": {
-          "planos_contratados": "ref_id_usuario_admin",
           "comentarios_postagens": "ref_id_usuario",
-          "fcm_tokens": "ref_id_usuario"
+          "fcm_tokens": "ref_id_usuario",
+          "planos_contratados": "ref_id_usuario_admin"
         },
         "sub": {
           "usuarios_empresas": "ref_id_usuario"
         }
       },
       "usuarios_empresas": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_usuario_empresa": {
             "db": {
