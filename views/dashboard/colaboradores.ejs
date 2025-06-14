@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criar_usuario.reset()"></button>
             </div>
             <div class="modal-body text-white">
-                <form id="criar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/criar-colaborador" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="alertas.success('Sucesso!')">
+                <form id="criar_usuario" is="dmx-serverconnect-form" method="post" action="/api/negocios/colaboradores/criar-colaborador" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="listagem_usuarios.load({});criar_modal_colaborador.hide();criar_usuario.reset()">
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="nome_completo" class="form-label">Nome completo</label>
@@ -54,28 +54,28 @@
 <div class="d-flex flex-row align-items-center justify-content-between mb-4">
     <div class="d-flex flex-column justify-content-start align-items-start">
         <h5 class="m-0 fw-bolder">Colaboradores</h5>
-        <p class="sub-titulo mt-1">Gestão de contas e acessos</p>
+        <p class="sub-titulo mt-1 mb-0">Gestão de contas e acessos</p>
     </div>
     <div class="d-flex align-items-center">
         <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criar_modal_colaborador">Adicionar</button>
     </div>
 </div>
 <div class="d-flex sp-container">
-    <table class="table mb-0 align-middle table-dark">
+    <table class="table table-dark mb-0 align-middle" style="--bs-table-bg: transparent;">
         <thead>
             <tr>
-                <th class="py-3">Nome completo</th>
-                <th class="py-3">Nome tratamento</th>
-                <th class="py-3">Email</th>
-                <th class="py-3">Tipo usuario</th>
+                <th class="py-3 titulo-tabela">Nome completo</th>
+                <th class="py-3 titulo-tabela">Nome tratamento</th>
+                <th class="py-3 titulo-tabela">Email</th>
+                <th class="py-3 titulo-tabela">Tipo usuario</th>
             </tr>
         </thead>
         <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listagem_usuarios.data.query_colaboradores" id="tableRepeat1">
-            <tr>
-                <td dmx-text="nome_completo" class="py-3"></td>
-                <td dmx-text="nome_tratamento" class="py-3"></td>
-                <td dmx-text="email" class="py-3"></td>
-                <td dmx-text="tipo_usuario" class="py-3"></td>
+            <tr style="color: #9a9cae">
+                <td dmx-text="nome_completo" class="py-3 fs-7 text-primary"></td>
+                <td dmx-text="nome_tratamento" class="py-3 fs-7"></td>
+                <td dmx-text="email" class="py-3 fs-7"></td>
+                <td dmx-text="tipo_usuario" class="py-3 fs-7"></td>
             </tr>
         </tbody>
     </table>

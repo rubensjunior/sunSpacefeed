@@ -149,7 +149,14 @@
               "conditional": null,
               "valid": true
             },
-            "query": "select * from \"usuarios\" where \"usuarios\".\"ref_id_empresa_ativa\" = ?"
+            "query": "select * from \"usuarios\" where \"usuarios\".\"ref_id_empresa_ativa\" = ? order by \"nome_completo\" ASC",
+            "orders": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "direction": "ASC"
+              }
+            ]
           }
         },
         "output": true,

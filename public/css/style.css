@@ -29,7 +29,7 @@ header {
   border-radius: 0.5rem;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .menu-header .nav-link:hover {
@@ -365,6 +365,11 @@ header {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   font-size: 1rem;
+}
+.titulo-tabela{
+  font-size: 13px;
+  color: #9a9cae !important;
+  text-transform: uppercase;
 }
 
 .offcanvas .nav-link:hover,
