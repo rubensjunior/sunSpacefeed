@@ -1,0 +1,30 @@
+<![CDATA[<!-- Wappler include fontawesome_5="cdn" bootstrap5="local" is="dmx-app" components="{dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{},dmxPreloader:{},dmxFormatter:{}}" -->
+<div class="sp-container mb-4 pt-3">
+    <table class="table table-dark mb-0 align-middle" style="--bs-table-bg: transparent;">
+        <thead>
+            <tr>
+                <%# Renderiza os cabeçalhos dinamicamente %>
+                <% headers.forEach(function(header) { %>
+                    <th class="pb-3 titulo-tabela" style="color: #9a9cae"><%= header %></th>
+                <% }); %>
+            </tr>
+        </thead>
+        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="<%= dataSource %>" id="<%= repeatId %>">
+            <tr style="color: #9a9cae">
+                <%# Renderiza as células dinamicamente %>
+                <% columns.forEach(function(column, index) { %>
+                    <td class="py-4 fs-7" <% if (column.click) { %>dmx-on:click="<%= column.click %>"<% } %>>
+                        <% if (column.icon) { %>
+                            <i class="<%= column.icon %> me-2 text-link-primary"></i>
+                        <% } %>
+                        <% if (column.class) { %>
+                            <span dmx-text="<%= column.field %>" class="<%= column.class %>"></span>
+                        <% } else { %>
+                            <span dmx-text="<%= column.field %>"></span>
+                        <% } %>
+                    </td>
+                <% }); %>
+            </tr>
+        </tbody>
+    </table>
+</div>]]>

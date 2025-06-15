@@ -1,2 +1,55 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="unidadespolos" appConnect="local" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="unidadespolos" appConnect="local" components="{dmxPreloader:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{}}" -->
+<div class="modal" id="criar_modal_polo" is="dmx-bs5-modal" tabindex="-1" data-bs-theme="dark" nocloseonclick="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar polo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form1">
+                    <div class="form-group mb-3"> <label for="input1" class="form-label">Some text</label>
+                        <input type="text" class="form-control" id="input1" name="input1" aria-describedby="input1_help" placeholder="Enter some text">
+                        <small id="input1_help" class="form-text text-muted">Your input is very valuable.</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <meta name="ac:route" content="/security/backoffice/unidades-polos">
+<dmx-preloader id="carregamento" spinner="cubeGrid" bgcolor="#0c0c0c" color="#3699FF" size="56"></dmx-preloader>
+
+<div class="d-flex flex-row align-items-center justify-content-between mb-4">
+    <div class="d-flex flex-column justify-content-start align-items-start">
+        <h5 class="m-0 fw-bolder">Unidades/Polos</h5>
+        <p class="sub-titulo mt-1 mb-0">Gestão de unidades - Polos do plano atual: {{plano_empresa.data.query_plano.polos_adicionais+1}}</p>
+    </div>
+    <div class="d-flex align-items-center">
+        <button id="btn1" class="btn btn-primary" data-bs-target="#criar_modal_polo" data-bs-toggle="modal">Adicionar</button>
+    </div>
+</div>
+<div class="d-flex sp-container mb-4 ">
+    <table class="table table-dark mb-0 align-middle">
+        <thead>
+            <tr>
+                <th class="pt-0 mt-0">Razao social</th>
+                <th class="pt-0 mt-0">Nome fantasia</th>
+                <th class="pt-0 mt-0">Nome polo</th>
+                <th class="pt-0 mt-0">Cnpj</th>
+                <th class="pt-0 mt-0">Whatsapp</th>
+                <th class="pt-0 mt-0">Status empresa</th>
+            </tr>
+        </thead>
+        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="minhasempresas.data.query_empresas" id="tableRepeat1">
+            <tr>
+                <td><i class="far fa-edit me-2 text-link-primary"></i> <span dmx-text="razao_social" class="text-link-primary"></span></td>
+                <td dmx-text="nome_fantasia"></td>
+                <td dmx-text="nome_polo"></td>
+                <td dmx-text="cnpj"></td>
+                <td dmx-text="whatsapp"></td>
+                <td dmx-text="status_empresa"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
