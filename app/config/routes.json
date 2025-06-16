@@ -13,7 +13,7 @@
     },
     {
       "path": "/security/backoffice/",
-      "page": "dashboard/inicial",
+      "page": "dashboard/dashboard",
       "layout": "backoffice"
     },
     {
