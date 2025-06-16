@@ -152,8 +152,8 @@ header {
 
 /* Profile Button */
 .btn-profile {
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
   padding: 0.5rem 1rem;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -164,11 +164,62 @@ header {
 .btn-profile:hover,
 .btn-profile:focus {
   border-color: var(--sp-primary);
-  background: rgba(54, 153, 255, 0.05);
+  background: rgba(54, 153, 255, 0.1);
 }
 
 .btn-profile::after {
-  display: none;
+  margin-left: 0.75rem;
+}
+
+/* Header Profile Dropdown Styles */
+.dropdown-menu {
+  background-color: var(--sp-container);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4);
+  padding: 0;
+  margin-top: 1rem !important;
+  border-radius: 0.75rem;
+  min-width: 280px;
+}
+
+.dropdown-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.dropdown-item {
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.875rem 1.25rem;
+  font-size: 0.875rem;
+  transition: none;
+}
+
+.dropdown-item:hover {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dropdown-item:active,
+.dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.dropdown-item i {
+  width: 1.25rem;
+  text-align: center;
+  margin-right: 0.75rem;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.dropdown-item.text-danger {
+  color: #ff3e3e !important;
+}
+
+.dropdown-item.text-danger:active,
+.dropdown-item.text-danger:focus {
+  background-color: rgba(255, 62, 62, 0.1);
 }
 
 /* Support Button */
@@ -260,32 +311,6 @@ header {
   border-radius: 1rem;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Header Profile Dropdown Styles */
-.dropdown-menu {
-  background-color: var(--sp-container);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
-          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
-  padding: 0;
-  margin-top: 0.5rem;
-}
-
-.dropdown-item {
-  color: #fff;
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-}
-
-.dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--sp-primary);
-}
-
-.dropdown-item i {
-  width: 1.25rem;
-  text-align: center;
 }
 
 /* Modal Styles */
