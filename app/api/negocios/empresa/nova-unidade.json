@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/unidades-polos.ejs",
+      "linkedForm": "criar_form_unidade"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "id_empresa_matriz",
+        "name": "id_empresa_matriz"
+      },
+      {
+        "type": "text",
+        "fieldName": "razao_social",
+        "options": {
+          "rules": {}
+        },
+        "name": "razao_social"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_fantasia",
+        "options": {
+          "rules": {}
+        },
+        "name": "nome_fantasia"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_polo",
+        "options": {
+          "rules": {}
+        },
+        "name": "nome_polo"
+      },
+      {
+        "type": "text",
+        "fieldName": "cnpj",
+        "options": {
+          "rules": {}
+        },
+        "name": "cnpj"
+      },
+      {
+        "type": "text",
+        "fieldName": "whatsapp",
+        "options": {
+          "rules": {}
+        },
+        "name": "whatsapp"
+      },
+      {
+        "type": "text",
+        "fieldName": "logradouro",
+        "options": {
+          "rules": {}
+        },
+        "name": "logradouro"
+      },
+      {
+        "type": "text",
+        "fieldName": "numero",
+        "options": {
+          "rules": {}
+        },
+        "name": "numero"
+      },
+      {
+        "type": "text",
+        "fieldName": "cep",
+        "options": {
+          "rules": {}
+        },
+        "name": "cep"
+      },
+      {
+        "type": "text",
+        "fieldName": "complemento",
+        "name": "complemento"
+      },
+      {
+        "type": "text",
+        "fieldName": "bairro",
+        "options": {
+          "rules": {}
+        },
+        "name": "bairro"
+      },
+      {
+        "type": "text",
+        "fieldName": "cidade",
+        "options": {
+          "rules": {}
+        },
+        "name": "cidade"
+      },
+      {
+        "type": "text",
+        "fieldName": "estado",
+        "options": {
+          "rules": {}
+        },
+        "name": "estado"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "validate",
+        "module": "validator",
+        "action": "validate",
+        "options": {
+          "data": [
+            {
+              "name": "validate_1",
+              "value": "{{$_POST.cnpj}}",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "postrgress",
+                    "table": "empresas",
+                    "column": "cnpj"
+                  },
+                  "message": "CNPJ já está cadastrado em nossa base."
+                }
+              },
+              "fieldName": "cnpj"
+            }
+          ]
+        }
+      },
+      {
+        "name": "insert_empresa",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "empresas",
+                "column": "razao_social",
+                "type": "text",
+                "value": "{{$_POST.razao_social}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_fantasia",
+                "type": "text",
+                "value": "{{$_POST.nome_fantasia}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo",
+                "type": "text",
+                "value": "{{$_POST.nome_polo}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj",
+                "type": "text",
+                "value": "{{$_POST.cnpj}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cep",
+                "type": "text",
+                "value": "{{$_POST.cep}}"
+              },
+              {
+                "table": "empresas",
+                "column": "whatsapp",
+                "type": "text",
+                "value": "{{$_POST.whatsapp}}"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa",
+                "type": "text",
+                "value": "{{'Ativo'}}"
+              },
+              {
+                "table": "empresas",
+                "column": "logradouro",
+                "type": "text",
+                "value": "{{$_POST.logradouro}}"
+              },
+              {
+                "table": "empresas",
+                "column": "numero",
+                "type": "text",
+                "value": "{{$_POST.numero}}"
+              },
+              {
+                "table": "empresas",
+                "column": "complemento",
+                "type": "text",
+                "value": "{{$_POST.complemento}}"
+              },
+              {
+                "table": "empresas",
+                "column": "bairro",
+                "type": "text",
+                "value": "{{$_POST.bairro}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cidade",
+                "type": "text",
+                "value": "{{$_POST.cidade}}"
+              },
+              {
+                "table": "empresas",
+                "column": "uf",
+                "type": "text",
+                "value": "{{$_POST.estado}}"
+              },
+              {
+                "table": "empresas",
+                "column": "empresa_matriz",
+                "type": "text",
+                "value": "{{$_POST.id_empresa_matriz}}"
+              }
+            ],
+            "table": "empresas",
+            "returning": "id_empresa",
+            "query": "insert into \"empresas\" (\"bairro\", \"cep\", \"cidade\", \"cnpj\", \"complemento\", \"empresa_matriz\", \"logradouro\", \"nome_fantasia\", \"nome_polo\", \"numero\", \"razao_social\", \"status_empresa\", \"uf\", \"whatsapp\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"id_empresa\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.razao_social}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.nome_fantasia}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.nome_polo}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.cnpj}}",
+                "test": ""
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{$_POST.cep}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{$_POST.whatsapp}}",
+                "test": ""
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{'Ativo'}}",
+                "test": ""
+              },
+              {
+                "name": ":P8",
+                "type": "expression",
+                "value": "{{$_POST.logradouro}}",
+                "test": ""
+              },
+              {
+                "name": ":P9",
+                "type": "expression",
+                "value": "{{$_POST.numero}}",
+                "test": ""
+              },
+              {
+                "name": ":P10",
+                "type": "expression",
+                "value": "{{$_POST.complemento}}",
+                "test": ""
+              },
+              {
+                "name": ":P11",
+                "type": "expression",
+                "value": "{{$_POST.bairro}}",
+                "test": ""
+              },
+              {
+                "name": ":P12",
+                "type": "expression",
+                "value": "{{$_POST.cidade}}",
+                "test": ""
+              },
+              {
+                "name": ":P13",
+                "type": "expression",
+                "value": "{{$_POST.estado}}",
+                "test": ""
+              },
+              {
+                "name": ":P14",
+                "type": "expression",
+                "value": "{{$_POST.id_empresa_matriz}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "security"
+        },
+        "meta": []
+      },
+      {
+        "name": "insert_usuario_empresa",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "postrgress",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_usuario",
+                "type": "text",
+                "value": "{{identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{insert_empresa.identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "cargo_usuario_empresa",
+                "type": "text",
+                "value": "{{'Administrador'}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "{{'Ativo'}}"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "returning": "id_usuario_empresa",
+            "query": "insert into \"usuarios_empresas\" (\"cargo_usuario_empresa\", \"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{insert_empresa.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{'Administrador'}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{'Ativo'}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}

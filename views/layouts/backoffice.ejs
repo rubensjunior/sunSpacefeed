@@ -56,7 +56,7 @@
             <select class="form-select bg-dark border-end-0 text-white fs-7" style="background-color: var(--sp-container) !important;" dmx-bind:options="minhasempresas.data.query_empresas" optiontext="nome_polo" optionvalue="id_empresa" id="empresas" name="empresas">
               <option value="">Selecione uma empresa</option>
             </select>
-            <button class="btn btn-primary fs-7 px-3" title="Confirmar seleção" dmx-on:click="atualizarempresausuario.load({id_empresa_selecionada: empresas.selectedValue})">
+            <button class="btn btn-primary fs-7 px-3" title="Confirmar seleção" dmx-on:click="run([{run:{outputType:'text',action:`atualizarempresausuario.load({id_empresa_selecionada: empresas.selectedValue})`}},{wait:{delay:1000}},{run:{outputType:'text',action:`navegacao.reload()`}}])">
               <i class="fas fa-check"></i>
             </button>
           </div>

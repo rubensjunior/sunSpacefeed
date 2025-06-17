@@ -10,7 +10,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="form1">
+                <form id="criar_form_unidade" is="dmx-serverconnect-form" method="post" action="/api/negocios/empresa/nova-unidade" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="minhasempresas.load({});criar_modal_polo.hide();criar_form_unidade.reset();alertas.success('Cadastro realizado com sucesso!')">
+                    <input id="id_empresa_matriz" name="id_empresa_matriz" type="hidden" class="form-control" dmx-bind:value="meuusuario.data.dados_usuario.empresa_matriz">
                     <!-- Step 1: Company Data -->
                     <div id="step1" dmx-show="modal_step.value == 1">
                         <div class="row g-3">
@@ -41,7 +42,7 @@
                     <div id="step2" dmx-show="modal_step.value == 2">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="logradouro" class="form-label">Endereço</label>
+                                <label for="logradouro" class="form-label">Endereço completo</label>
                                 <input type="text" class="form-control" id="logradouro" name="logradouro" required="" data-msg-required="Por favor, informe o endereço">
                             </div>
                             <div class="col-md-3">
@@ -105,7 +106,7 @@
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" dmx-show="modal_step.value == 2" dmx-on:click="modal_step.setValue(1)">Voltar</button>
                     <button type="button" class="btn btn-primary" dmx-show="modal_step.value == 1" dmx-on:click="modal_step.setValue(2)">Próximo</button>
-                    <button type="button" class="btn btn-success" dmx-show="modal_step.value == 2" dmx-on:click="form1.submit()">Cadastrar</button>
+                    <button class="btn btn-success" dmx-show="modal_step.value == 2" dmx-on:click="criar_form_unidade.submit()">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -149,11 +150,14 @@
     </table>
 </div>
 
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/ npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        $('#cep').mask('00000-000');
-        $('#whatsapp').mask('(00) 0 0000-0000');
-        $('#check_cnpj').mask('00.000.000/0000-00');
-        $('#cnpj').mask('00.000.000/0000-00');
-    });
+    $('#cep').mask('00000-000');
+    $('#whatsapp').mask('(00) 0 0000-0000');
+    $('#check_cnpj').mask('00.000.000/0000-00');
+    $('#cnpj').mask('00.000.000/0000-00');
 </script>

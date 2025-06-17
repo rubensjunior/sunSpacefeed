@@ -59,6 +59,10 @@
               {
                 "table": "empresas",
                 "column": "*"
+              },
+              {
+                "table": "empresas",
+                "column": "empresa_matriz"
               }
             ],
             "params": [
@@ -126,7 +130,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"email\", \"usuarios\".\"nome_tratamento\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"empresas\".* from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"email\", \"usuarios\".\"nome_tratamento\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"empresas\".*, \"empresas\".\"empresa_matriz\" from \"usuarios\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios\".\"ref_id_empresa_ativa\" where \"usuarios\".\"id_usuario\" = ?"
           }
         },
         "output": true,
@@ -214,6 +218,10 @@
           {
             "type": "text",
             "name": "uf"
+          },
+          {
+            "type": "number",
+            "name": "empresa_matriz"
           }
         ],
         "type": "dbconnector_single",
