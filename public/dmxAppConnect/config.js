@@ -174,5 +174,72 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "unidadespolos": {
+    "data_detail_polo": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_empresa"
+        },
+        {
+          "type": "datetime",
+          "name": "created_at_empresa"
+        },
+        {
+          "type": "text",
+          "name": "razao_social"
+        },
+        {
+          "type": "text",
+          "name": "nome_fantasia"
+        },
+        {
+          "type": "text",
+          "name": "nome_polo"
+        },
+        {
+          "type": "text",
+          "name": "cnpj"
+        },
+        {
+          "type": "text",
+          "name": "cep"
+        },
+        {
+          "type": "text",
+          "name": "whatsapp"
+        },
+        {
+          "type": "text",
+          "name": "status_empresa"
+        },
+        {
+          "type": "text",
+          "name": "logradouro"
+        },
+        {
+          "type": "text",
+          "name": "numero"
+        },
+        {
+          "type": "text",
+          "name": "complemento"
+        },
+        {
+          "type": "text",
+          "name": "bairro"
+        },
+        {
+          "type": "text",
+          "name": "cidade"
+        },
+        {
+          "type": "text",
+          "name": "uf"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
