@@ -33,11 +33,6 @@
       "layout": "backoffice"
     },
     {
-      "path": "/security/backoffice/postagens",
-      "page": "dashboard/postagens",
-      "layout": "backoffice"
-    },
-    {
       "path": "/security/backoffice/notificacoes-push",
       "page": "dashboard/notificacoes-push",
       "layout": "backoffice"
