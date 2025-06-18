@@ -1,0 +1,323 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/unidades-polos.ejs",
+      "linkedForm": "editar_form_unidade"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "id_empresa_update",
+        "name": "id_empresa_update"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_razao_social",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_razao_social"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_nome_fantasia",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_nome_fantasia"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_nome_polo",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_nome_polo"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_cnpj",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_cnpj"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_whatsapp",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_whatsapp"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_logradouro",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_logradouro"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_numero",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_numero"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_cep",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_cep"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_complemento",
+        "name": "editar_complemento"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_bairro",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_bairro"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_cidade",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_cidade"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_estado",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_estado"
+      },
+      {
+        "type": "text",
+        "fieldName": "editar_status",
+        "options": {
+          "rules": {}
+        },
+        "name": "editar_status"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "update_empresa",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "postrgress",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "empresas",
+              "column": "razao_social",
+              "type": "text",
+              "value": "{{$_POST.editar_razao_social}}"
+            },
+            {
+              "table": "empresas",
+              "column": "nome_fantasia",
+              "type": "text",
+              "value": "{{$_POST.editar_nome_fantasia}}"
+            },
+            {
+              "table": "empresas",
+              "column": "nome_polo",
+              "type": "text",
+              "value": "{{$_POST.editar_nome_polo}}"
+            },
+            {
+              "table": "empresas",
+              "column": "cnpj",
+              "type": "text",
+              "value": "{{$_POST.editar_cnpj}}"
+            },
+            {
+              "table": "empresas",
+              "column": "cep",
+              "type": "text",
+              "value": "{{$_POST.editar_cep}}"
+            },
+            {
+              "table": "empresas",
+              "column": "whatsapp",
+              "type": "text",
+              "value": "{{$_POST.editar_whatsapp}}"
+            },
+            {
+              "table": "empresas",
+              "column": "status_empresa",
+              "type": "text",
+              "value": "{{$_POST.editar_status}}"
+            },
+            {
+              "table": "empresas",
+              "column": "logradouro",
+              "type": "text",
+              "value": "{{$_POST.editar_logradouro}}"
+            },
+            {
+              "table": "empresas",
+              "column": "numero",
+              "type": "text",
+              "value": "{{$_POST.editar_numero}}"
+            },
+            {
+              "table": "empresas",
+              "column": "complemento",
+              "type": "text",
+              "value": "{{$_POST.editar_complemento}}"
+            },
+            {
+              "table": "empresas",
+              "column": "bairro",
+              "type": "text",
+              "value": "{{$_POST.editar_bairro}}"
+            },
+            {
+              "table": "empresas",
+              "column": "cidade",
+              "type": "text",
+              "value": "{{$_POST.editar_cidade}}"
+            },
+            {
+              "table": "empresas",
+              "column": "uf",
+              "type": "text",
+              "value": "{{$_POST.editar_estado}}"
+            }
+          ],
+          "table": "empresas",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "id_empresa",
+                "field": "id_empresa",
+                "type": "string",
+                "operator": "equal",
+                "value": "{{$_POST.id_empresa_update}}",
+                "data": {
+                  "column": "id_empresa"
+                },
+                "operation": "="
+              }
+            ],
+            "conditional": null,
+            "valid": true
+          },
+          "returning": "id_empresa",
+          "query": "update \"empresas\" set \"razao_social\" = ?, \"nome_fantasia\" = ?, \"nome_polo\" = ?, \"cnpj\" = ?, \"cep\" = ?, \"whatsapp\" = ?, \"status_empresa\" = ?, \"logradouro\" = ?, \"numero\" = ?, \"complemento\" = ?, \"bairro\" = ?, \"cidade\" = ?, \"uf\" = ? where \"id_empresa\" = ?",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.editar_razao_social}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.editar_nome_fantasia}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.editar_nome_polo}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.editar_cnpj}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.editar_cep}}",
+              "test": ""
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{$_POST.editar_whatsapp}}",
+              "test": ""
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{$_POST.editar_status}}",
+              "test": ""
+            },
+            {
+              "name": ":P8",
+              "type": "expression",
+              "value": "{{$_POST.editar_logradouro}}",
+              "test": ""
+            },
+            {
+              "name": ":P9",
+              "type": "expression",
+              "value": "{{$_POST.editar_numero}}",
+              "test": ""
+            },
+            {
+              "name": ":P10",
+              "type": "expression",
+              "value": "{{$_POST.editar_complemento}}",
+              "test": ""
+            },
+            {
+              "name": ":P11",
+              "type": "expression",
+              "value": "{{$_POST.editar_bairro}}",
+              "test": ""
+            },
+            {
+              "name": ":P12",
+              "type": "expression",
+              "value": "{{$_POST.editar_cidade}}",
+              "test": ""
+            },
+            {
+              "name": ":P13",
+              "type": "expression",
+              "value": "{{$_POST.editar_estado}}",
+              "test": ""
+            },
+            {
+              "operator": "equal",
+              "type": "expression",
+              "name": ":P14",
+              "value": "{{$_POST.id_empresa_update}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

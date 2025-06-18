@@ -121,8 +121,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="modal_step.setValue(1);data_detail_polo.select(0)"></button>
             </div>
             <div class="modal-body">
-                <form id="editar_form_unidade" is="dmx-serverconnect-form" method="post" action="/api/negocios/empresa/nova-unidade" dmx-on:error="alertas.danger('Ocorreu um erro.')" dmx-on:success="minhasempresas.load({});criar_modal_polo.hide();criar_form_unidade.reset();alertas.success('Cadastro realizado com sucesso!')">
-                    <input id="id_empresa_matriz1" name="id_empresa_matriz" type="hidden" class="form-control" dmx-bind:value="meuusuario.data.dados_usuario.empresa_matriz">
+                <form id="editar_form_unidade" is="dmx-serverconnect-form" method="post" action="/api/negocios/empresa/atualizar-unidade" dmx-on:error="alertas.danger('Ocorreu um erro! Entre em contato com o suporte.')" dmx-on:success="minhasempresas.load({});editar_modal_polo.hide();data_detail_polo.select(0);modal_step.setValue(1);editar_form_unidade.reset()">
+                    <input id="id_empresa_update" name="id_empresa_update" type="hidden" class="form-control" dmx-bind:value="data_detail_polo.data.id_empresa">
                     <!-- Step 1: Company Data -->
                     <div id="step3" dmx-show="modal_step.value == 1">
                         <div class="row g-3">
@@ -154,7 +154,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="editar_logradouro" class="form-label">Endereço completo</label>
-                                <input type="text" class="form-control" id="editar_logradouro" name="editar_logradouro" required="" data-msg-required="Por favor, informe o endereço" dmx-bind:value="data_detail_polo.data.complemento">
+                                <input type="text" class="form-control" id="editar_logradouro" name="editar_logradouro" required="" data-msg-required="Por favor, informe o endereço" dmx-bind:value="data_detail_polo.data.logradouro">
                             </div>
                             <div class="col-md-3">
                                 <label for="editar_numero" class="form-label">Número</label>
@@ -179,7 +179,7 @@
                             <div class="col-md-6">
                                 <label for="editar_estado" class="form-label">Estado</label>
                                 <select class="form-select" id="editar_estado" name="editar_estado" required="" data-msg-required="Por favor, selecione o estado" dmx-bind:value="data_detail_polo.data.uf">
-                                    <option value="">-- Selecione o Estado --</option>
+                                    <option value="">Selecione o Estado</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
                                     <option value="AP">Amapá</option>
@@ -209,6 +209,14 @@
                                     <option value="TO">Tocantins</option>
                                 </select>
                             </div>
+                            <div class="col-md-6">
+                                <label for="editar_status" class="form-label">Status</label>
+                                <select class="form-select" id="editar_status" name="editar_status" required="" data-msg-required="Por favor, selecione o estado" dmx-bind:value="data_detail_polo.data.status_empresa">
+                                    <option value="">Selecione uma opção</option>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -217,7 +225,7 @@
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" dmx-show="modal_step.value == 2" dmx-on:click="modal_step.setValue(1)">Voltar</button>
                     <button type="button" class="btn btn-primary" dmx-show="modal_step.value == 1" dmx-on:click="modal_step.setValue(2)">Próximo</button>
-                    <button class="btn btn-success" dmx-show="modal_step.value == 2" dmx-on:click="criar_form_unidade.submit()">Cadastrar</button>
+                    <button class="btn btn-success" dmx-show="modal_step.value == 2" dmx-on:click="editar_form_unidade.submit()">Atualizar</button>
                 </div>
             </div>
         </div>
