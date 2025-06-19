@@ -26,5 +26,9 @@
   "colaboradores.ejs": {
     "layoutPage": "backoffice",
     "description": ""
+  },
+  "posts.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
   }
 }

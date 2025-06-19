@@ -46,6 +46,11 @@
       "path": "/security/backoffice/colaboradores",
       "page": "dashboard/colaboradores",
       "layout": "backoffice"
+    },
+    {
+      "path": "/security/backoffice/postagens",
+      "page": "dashboard/posts",
+      "layout": "backoffice"
     }
   ],
   "layouts": {

@@ -1,0 +1,12 @@
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="posts" appConnect="local" -->
+<meta name="ac:route" content="/security/backoffice/postagens">
+
+<div class="d-flex flex-row align-items-center justify-content-between mb-4">
+    <div class="d-flex flex-column justify-content-start align-items-start">
+        <h5 class="m-0 fw-bolder">Postagens</h5>
+        <p class="sub-titulo mt-1 mb-0">Gestão de unidades - Polos do plano atual: {{plano_empresa.data.query_plano.polos_adicionais}}</p>
+    </div>
+    <div class="d-flex align-items-center">
+        <button id="btn1" class="btn btn-primary" data-bs-target="#criar_modal_polo" data-bs-toggle="modal">Adicionar</button>
+    </div>
+</div>
