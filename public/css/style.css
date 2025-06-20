@@ -500,6 +500,6 @@ header {
   .btn-profile,
   .form-control,
   .form-select {
-    border: 1px solid currentColor;
+    border: 1px solid;
   }
 }
