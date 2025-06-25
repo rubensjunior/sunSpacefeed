@@ -495,6 +495,124 @@ header {
   }
 }
 
+/* Summernote Dark Theme */
+.note-editor.note-frame {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.5rem;
+}
+
+.note-editor .note-toolbar {
+  background-color: var(--sp-background) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.note-editor .note-editing-area,
+.note-editor .note-editable {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #fff !important;
+}
+
+.note-editor .note-statusbar {
+  background-color: var(--sp-background) !important;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable="true"]:empty:not(:focus):before {
+  color: rgba(255, 255, 255, 0.5);
+  content: attr(data-placeholder);
+}
+
+.note-editor.note-frame .note-statusbar {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.note-editor.note-frame .note-statusbar .note-resizebar {
+  padding-top: 1px;
+  height: 9px;
+}
+
+.note-editor.note-frame .note-statusbar .note-resizebar .note-icon-bar {
+  width: 20px;
+  margin: 1px auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Toolbar Buttons */
+.note-editor.note-frame .note-toolbar .note-btn-group .note-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.note-editor.note-frame .note-toolbar .note-btn-group .note-btn:hover,
+.note-editor.note-frame .note-toolbar .note-btn-group .note-btn:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--sp-primary);
+  color: #fff;
+}
+
+.note-editor.note-frame .note-toolbar .note-btn-group .note-btn.active {
+  background-color: var(--sp-primary);
+  border-color: var(--sp-primary);
+  color: #fff;
+}
+
+/* Dropdown Menus */
+.note-editor .note-dropdown-menu {
+  background-color: var(--sp-container);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  min-width: 100px;
+}
+
+.note-editor .note-dropdown-menu .note-dropdown-item {
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.5rem;
+}
+
+.note-editor .note-dropdown-menu .note-dropdown-item:hover,
+.note-editor .note-dropdown-menu .note-dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* Modal Dialogs */
+.note-modal {
+  background-color: var(--sp-container);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.note-modal .note-modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+}
+
+.note-modal .note-modal-body {
+  padding: 1rem;
+}
+
+.note-modal .note-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+}
+
+.note-modal .note-modal-title {
+  color: #fff;
+  font-weight: 500;
+}
+
 /* Adicionando suporte a modo de alto contraste */
 @media (forced-colors: active) {
   .btn-profile,
