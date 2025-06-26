@@ -24,7 +24,9 @@
     ],
     "tables": {
       "empresas": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_empresa": {
             "db": {
@@ -475,6 +477,12 @@
           "comment": "This table holds metadata for derived keys given a key_id and key_context. The raw key is never stored."
         }
       },
+      "vault.secrets": {
+        "db": {
+          "schema": "vault",
+          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
+        }
+      },
       "realtime.messages_2025_05_12": {
         "db": {
           "schema": "realtime"
@@ -515,21 +523,13 @@
           "schema": "realtime"
         }
       },
-      "vault.secrets": {
-        "db": {
-          "schema": "vault",
-          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
-        }
-      },
       "comentarios_postagens": {
         "db": {
           "schema": "public"
         }
       },
       "postagens": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "columns": {
           "id_postagem": {
             "db": {
@@ -585,6 +585,15 @@
               "referenceType": "uuid",
               "onUpdate": "NO ACTION",
               "onDelete": "CASCADE"
+            }
+          },
+          "status_postagem": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
             }
           }
         },

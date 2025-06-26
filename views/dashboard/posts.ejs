@@ -1,10 +1,10 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="posts" appConnect="local" components="{dmxSummernote:{}}" jquery_slim_35="cdn" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="posts" appConnect="local" components="{dmxSummernote:{},dmxValidator:{}}" jquery_slim_35="cdn" -->
 <meta name="ac:route" content="/security/backoffice/postagens">
 
 <div class="d-flex flex-row align-items-center justify-content-between mb-4">
     <div class="d-flex flex-column justify-content-start align-items-start">
         <h5 class="m-0">Postagens</h5>
-        <p class="sub-titulo mt-1 mb-0">Gestão de unidades - Polos do plano atual: {{plano_empresa.data.query_plano.polos_adicionais}}</p>
+        <p class="sub-titulo mt-1 mb-0">Gestão de conteúdo</p>
     </div>
     <div class="d-flex align-items-center">
         <button id="btn1" class="btn btn-primary" data-bs-target="#criar_modal_polo" data-bs-toggle="modal">Nova postagem</button>
@@ -21,22 +21,27 @@
     </div>
 
 
-    <form id="criar_form_postagem" class="w-100">
+    <form id="criar_form_postagem" class="w-100" is="dmx-serverconnect-form" method="post" action="/api/negocios/postagens/criar-postagem" dmx-on:error="alertas.danger('Ocorreu um erro!')" dmx-on:success="criar_form_postagem.reset();alertas.success('Deu certo!')">
+        <div class="form-group ">
+            <input type="hidden" class="form-control" id="id_empresa_postagem" name="id_empresa_postagem" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.ref_id_empresa_ativa">
+            <input type="hidden" class="form-control" id="nome_autor" name="nome_autor" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="meuusuario.data.dados_usuario.nome_tratamento">
+        </div>
 
 
         <div class="form-group mb-3"> <label for="titulo_post" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo_post" name="titulo_post" aria-describedby="input1_help">
+            <input type="text" class="form-control" id="titulo_post" name="titulo_post" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
         </div>
         <div class="form-group mb-3">
-            <div id="editor_post" is="dmx-summernote" dmx-bind:toolbar="[['style',['style']],['font',['bold','underline','clear']],['fontname',['fontname']],['color',['color']],['para',['ul','ol','paragraph']],['table',['table']],['insert',['link']],['view',['fullscreen','codeview','help']]]" lang="pt-BR" min-height="320" name="editor_post"></div>
+            <textarea id="conteudo_post_texto" class="form-control" is="dmx-summernote" dmx-bind:toolbar="[['style',['style']],['font',['bold','underline','clear']],['fontname',['fontname']],['color',['color']],['para',['ul','ol','paragraph']],['table',['table']],['insert',['link','picture','video']],['view',['fullscreen','codeview','help']]]" name="conteudo_post_texto" height="320"></textarea>
+            <!--<div id="editor_post" is="dmx-summernote" dmx-bind:toolbar="[['style',['style']],['font',['bold','underline','clear']],['fontname',['fontname']],['color',['color']],['para',['ul','ol','paragraph']],['table',['table']],['insert',['link']],['view',['fullscreen','codeview','help']]]" lang="pt-BR" min-height="320" name="editor_post"></div>-->
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center">
             <div class="d-flex w-75">
-                <div class="form-group me-4"> <label for="input2" class="form-label">Imagem (imagem unica - 1080px por 1080px)</label>
+                <div class="form-group me-4"> <label for="nome_autor" class="form-label">Imagem (imagem unica - 1080px por 1080px)</label>
                     <input id="imagem_post" name="imagem_post" type="file" class="form-control">
                 </div>
-                <div class="form-group w-25"> <label for="input2" class="form-label">Status da publicação</label>
-                    <select id="status_postagem" class="form-select" name="status_postagem">
+                <div class="form-group w-25"> <label for="nome_autor" class="form-label">Status da publicação</label>
+                    <select id="status_postagem" class="form-select" name="status_postagem" required="" data-msg-required="Este é um campo obrigatório!">
                         <option value="">Escolha um status</option>
                         <option value="Rascunho">Rascunho</option>
                         <option value="Publicado">Publicado</option>
@@ -46,7 +51,7 @@
 
 
             <div class="form-group">
-                <button id="btn2" class="btn btn-primary">Publicar</button>
+                <button id="btn2" class="btn btn-primary" type="submit">Publicar</button>
             </div>
         </div>
 
